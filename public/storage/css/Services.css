@@ -1,0 +1,225 @@
+/* Fixes */
+@font-face {
+    font-family: "Kanit";
+    src: url("../res/font/Kanit/Kanit-Regular.ttf");
+}
+
+:root {
+    --primary-color: #263A90;
+    --secondary-color: #ADD8FF;
+    --tertiary-color: #FCC422;
+    --tertiary-color-translucent: #fcc52240;
+    --quarternary-color: #FFFFFF;
+    --quarternary-color-translucent: #ffffffab;
+
+    --primary-font: Kanit;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: var(--primary-font);
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+}
+
+.wrapper {
+    box-sizing: border-box;
+    position: relative;
+    padding-bottom: 55px;
+    /* Height of footer */
+    min-height: 100%;
+}
+
+.page-footer {
+    background-color: #FCC422;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 55px;
+}
+
+#footer-footer {
+    padding-top: 10px;
+    color: #495888;
+    background: linear-gradient(180deg, rgba(25, 26, 46, 1) 0%, rgba(6, 7, 27, 1) 100%);
+    ;
+    position: absolute;
+    bottom: 0;
+}
+
+/* End */
+/* Actual Modifications */
+#nav {
+    width: 90%;
+    padding: 0;
+}
+
+.navbar {
+    position: fixed;
+    z-index: 2;
+    width: 90%;
+    height: auto;
+    padding-left: 20%;
+    background: linear-gradient(180deg, rgba(26, 34, 68, 1) 0%, rgba(6, 8, 15, 0.7) 100%);
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom: 3px solid #FCC422;
+    border-left: 3px solid #FCC422;
+    border-right: 3px solid #FCC422;
+    box-shadow: 2px 2px 15px 3px rgba(0, 0, 0, 0.45);
+}
+
+.nav-link {
+    color: var(--quarternary-color);
+    border-bottom: 5px solid transparent;
+}
+
+.nav-item :hover {
+    color: var(--primary-color);
+    background-color: var(--quarternary-color);
+}
+
+.nav-item {
+    font-size: larger;
+    margin-left: 10px;
+}
+
+.nav-item:active {
+    color: white;
+}
+
+#nav-active-link {
+    border-radius: 0;
+    border-bottom: 5px solid white;
+}
+
+#logo-container {
+    position: fixed;
+    z-index: 3;
+    padding: 0.5vw;
+    width: 10%;
+    margin-left: 5%;
+    height: auto;
+    background-color: var(--tertiary-color);
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: 8px -6px 26px 3px rgba(0, 0, 0, 0.45);
+}
+
+#profile-pic {
+    width: 5%;
+    height: 5%;
+}
+
+#intro-container {
+    padding-top: 10%;
+    padding-bottom: 1%;
+    background-color: #04091DB3;
+    height: 100%;
+    text-align: center;
+    color: #FCC422;
+    font-weight: bold;
+    font-size: 72px;
+}
+
+#skewed {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 125%;
+    height: 100%;
+    clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+#content-container-a,
+#content-container-b {
+    height: 100%;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
+    padding: 3%;
+}
+
+#content-container-a {
+    background-color: #04091D80;
+}
+
+#content-container-b {
+    background-color: #04091DB3;
+}
+
+#image-for-small {
+    width: 100%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+#description-container-a {
+    padding-left: 30px;
+    padding-right: 30px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+#bottom {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* End */
+
+/* Shared */
+.parallax-bg-img {
+    z-index: 0;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    box-shadow: 8px -6px 26px 3px rgba(0, 0, 0, 0.45);
+}
+
+/* End */
+
+/* Responsive */
+@media (min-width: 320px) {
+
+    #intro-container {
+        font-size: 50px;
+    }
+
+    #content-container {
+        padding-bottom: 10%;
+    }
+
+    #post-container {
+        margin-top: 5%;
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+
+    #intro-container {
+        font-size: 72px;
+    }
+
+    #content-container {
+        padding-bottom: 2%;
+    }
+
+    #post-container {
+        margin-top: 2%;
+        width: 75%;
+    }
+}
+
+/* End */

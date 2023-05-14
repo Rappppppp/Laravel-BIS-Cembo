@@ -1,0 +1,39 @@
+h5.message {
+    padding: 0;
+}
+
+.message {
+    margin-left: -5rem;
+}
+
+button.btn.btn-primary.px-4.message {
+    margin-left: -6rem;
+    background: #131620;
+    border-color: white;
+}
+
+button.btn.btn-primary.p-3.px-5 {
+    background: #131620;
+    border-color: white;
+}
+
+.col-md-6.btn-contact {
+    text-align: center;
+}
+
+button.btn.btn-primary.p-3.px-5 {
+    border-radius: 5px;
+}
+
+#footer-footer {
+    font-family: var(--primary-font);
+    padding-top: 10px;
+    color: #495888;
+    background-color: #191A2E;
+    position: absolute;
+    top: 28rem;
+}
+
+textarea {
+    resize: none;
+}
