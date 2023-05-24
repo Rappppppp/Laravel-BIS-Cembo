@@ -81,11 +81,15 @@ body {
     color: var(--quarternary-color);
 }
 
+#officials {
+    height: 100%;
+}
+
 /* End */
 /* Shared */
 .parallax-bg-img {
     z-index: 0;
-    height: 100vh;
+    height: 100%;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

@@ -32,7 +32,6 @@
 }
 </style>
 
-
 <h3>Complaint Form</h3>
 <a class="nav-link" href="{{ route('user.homepage') }}" onclick="event.preventDefault();
             this.closest'form').submit(); " role="button">
@@ -42,6 +41,11 @@
     <div class="alert alert-danger">{{ session('error') }}</div>
 @endif
 
+@if (session('success'))
+    <div id="success-message" class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 <form method="POST" action="{{ route('complaints.submit') }}" enctype="multipart/form-data">
     @csrf
 

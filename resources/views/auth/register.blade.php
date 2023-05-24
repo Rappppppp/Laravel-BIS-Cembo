@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Bootstrap demo</title>
+	<title>Registration</title>
 	<link href="{{ asset('storage/node_modules/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('storage/css/Login.css') }}" rel="stylesheet">
 </head>
@@ -28,25 +28,34 @@ $nationals = array('Afghan','Albanian','Algerian','American','Andorran','Angolan
 						<form method="POST" action="{{ route('register') }}">
 						@csrf
 						<div class="row" id="register-field-container">
+						@if ($errors->any())
+							<script>
+								var errors = [];
+								@foreach ($errors->all() as $error)
+									errors.push("{{ $error }}");
+								@endforeach
+								alert(errors.join("\n"));
+							</script>
+						@endif
 							<div class="col">
 								<div class="row" id="field">
-									<input type="text" name="first_name" placeholder="First Name" required>
+									<input type="text" name="first_name" placeholder="First Name" >
 								</div>
 								<div class="row" id="field">
-									<input type="text" name="middle_name" placeholder="Middle Name" required>
+									<input type="text" name="middle_name" placeholder="Middle Name" >
 								</div>
 								<div class="row" id="field">
-									<input type="text" name="last_name" placeholder="Last Name" required>
+									<input type="text" name="last_name" placeholder="Last Name" >
 								</div>
 								<div class="row" id="field">
-									<input type="text" name="email" placeholder="Email Address" required>
+									<input type="text" name="email" placeholder="Email Address" >
 								</div>
 								<div class="row" id="field">
 									<div class="col-6" style="padding-right: 8px;">
-										<input type="password" name ="password" placeholder="Password" required autocomplete="new-password">
+										<input type="password" name ="password" placeholder="Password"  autocomplete="new-password">
 									</div>
 									<div class="col-6" style="padding-left: 8px;">
-										<input type="password" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password">
+										<input type="password" name="password_confirmation" placeholder="Confirm Password"  autocomplete="new-password">
 									</div>
 								</div>
 							</div>
@@ -71,10 +80,10 @@ $nationals = array('Afghan','Albanian','Algerian','American','Andorran','Angolan
 						<div class="row" id="register-field-container">
 							<div class="col">
 								<div class="row" id="field">
-									<input type="date" name="date_of_birth" placeholder="Date of Birth" required>
+									<input type="date" name="date_of_birth" placeholder="Date of Birth" >
 								</div>
 								<div class="row" id="field">
-									<input type="text" name="place_of_birth" placeholder="Place of Birth" required>
+									<input type="text" name="place_of_birth" placeholder="Place of Birth" >
 								</div>
 								<div class="row" id="field">
 									<div class="col" id="input">
@@ -84,7 +93,7 @@ $nationals = array('Afghan','Albanian','Algerian','American','Andorran','Angolan
 											</div>
 											<div class="col">
 												<div class="select">
-													<select name="gender" required>
+													<select name="gender" >
 														<option disabled selected>Select</option>
 														<option value="Male">Male</option>
 														<option value="Female">Female</option>
@@ -381,7 +390,7 @@ $nationals = array('Afghan','Albanian','Algerian','American','Andorran','Angolan
 												<span style="color: gray;">Relationship</span>
 											</div>
 											<div class="col">
-												<div class="select">
+												<div class="select">	
 													<select name="relationship">
 														<option disabled selected>Select</option>
 														<option value="Self">Self</option>
@@ -465,10 +474,11 @@ $nationals = array('Afghan','Albanian','Algerian','American','Andorran','Angolan
 							<div class="col">
 								<div class="row" id="field">
 									<div class="col-6" style="padding-right: 8px;">
-										<input type="number" name="years_makati" placeholder="Years in Makati">
+										<input type="text" name="years_makati" placeholder="Years in Makati"> 
+										<!-- onfocus="(this.type='date')" onblur="(this.type='text')" -->
 									</div>
 									<div class="col-6" style="padding-left: 8px;">
-										<input type="number" name="years_cembo" placeholder="Years in Cembo">
+										<input type="text" name="years_cembo" placeholder="Years in Cembo">
 									</div>
 								</div>
 								<div class="row" id="field">

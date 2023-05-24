@@ -99,6 +99,7 @@ Route::middleware([
     Route::get('/admin/complaint-requests', [AdminController::class, 'complaintRequests'])->name('admin.complaintRequests')->middleware('auth', $OfficlaAdminsRole);
     Route::put('/complaints/update/{id}', [ComplaintController::class, 'update'])->name('complaints.update');
     Route::delete('/complaints/{complaint}', [ComplaintController::class, 'destroy'])->name('complaints.delete');
+    Route::get('/admin/complaint-requests/{id}', [AdminController::class, 'complaintShow'])->name('admin.complaintShow')->middleware('auth', $OfficlaAdminsRole);
 
     // SEND EMAIL - COMPLAINTS
     Route::put('/complaintApproved/send/{id}', [NotifyEmailController::class, 'complaintApproved'])->name('complaintApproved.send');

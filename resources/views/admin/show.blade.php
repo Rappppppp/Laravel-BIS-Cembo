@@ -1,103 +1,160 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ $user->barangay_id }}
-        </h2>
-    </x-slot>
+<!doctype html> 
+<head>
+    @include('admin.components.head')
+</head>
+<body>
+    <div class="wrapper">    
+        <header>
+            @include('admin.components.sidenav')
+            @include('admin.components.nav')
+        </header>
+            <!-- Content -->
+            <script>
+                // Hide success message after 5 seconds
+                setTimeout(function() {
+                    document.getElementById('success-message').style.display = 'none';
+                }, 5000);
+            </script>
+            <main>
+                <div id="content">
+                    @if (session('success'))
+                        <div id="success-message" class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    <div class="parallax-bg-img" style="background-image: url('res/Rectangle\ 68.png');">
+                        <div class="card">
+                            <div class="card-header" id="message">
+                            <div class="block mb-8">
+                                <a class="text-dark btn btn-warning" href="{{ url()->previous() }}">Back to list</a>
+                            </div>
+                                <div class="row">
+                                    <div class="col col-sm-12">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered" id="user_data">
+                                        <h3>Personal Information</h3>
+                                        <thead>
+                                            <tr>
+                                                <th>ID : Barangay ID</th>
+                                                <th>Name</th>
+                                                <th>Gender</th>
+                                                <th>Age</th>
+                                                <th>Birthday</th>
+                                                <th>Birthplace</th>
+                                                <th>Nationality</th>
+                                                <th>Religion</th>
+                                                <th>Civil Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-    <div>
-        <div class="max-w-6xl mx-auto py-10 sm:px-6 lg:px-8">
-            <div class="block mb-8">
-                <a href="{{ route('admin.index') }}" class="bg-gray-200 hover:bg-gray-300 text-black font-bold py-2 px-4 rounded">Back to list</a>
-            </div>
-            <br>
-            <div class="flex flex-col">
-                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                            <table class="min-w-full divide-y divide-gray-200 w-full">
-                                <tr class="border-b">
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        ID
-                                    </th>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        {{ $user->id }} : {{ $user->barangay_id }}
-                                    </td>
-                                </tr>
-                                <tr class="border-b">
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Name
-                                    </th>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        {{ $user->name }}
-                                    </td>
-                                </tr>
-                                <tr class="border-b">
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Gender
-                                    </th>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        {{ $information->gender }}
-                                    </td>
-                                </tr>
-                                @php
-                                    $birthdate = new DateTime($information->date_of_birth);
-                                    $today = new DateTime();
-                                    $age = $today->diff($birthdate)->y;
-                                @endphp
-                                <tr class="border-b">
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Age
-                                    </th>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        {{ $age }}
-                                    </td>
-                                </tr>
-                                <tr class="border-b">
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Birthday
-                                    </th>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        {{ $information->date_of_birth }}
-                                    </td>
-                                </tr>
-                                <tr class="border-b">
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Birthplace
-                                    </th>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        {{ $information->place_of_birth }}
-                                    </td>
-                                </tr>
-                                <tr class="border-b">
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Nationality
-                                    </th>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        {{ $information->nationality }}
-                                    </td>
-                                </tr>
-                                <tr class="border-b">
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Religion
-                                    </th>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        {{ $information->religion }}
-                                    </td>
-                                </tr>
-                                <tr class="border-b">
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Civil Status
-                                    </th>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        {{ $information->civil_status }}
-                                    </td>
-                                </tr>
-                            </table>
+                                            <tr>
+                                                <td>{{ $user->id }} : {{ $user->barangay_id }}</td>
+                                                <td>{{ $user->name }}</td>
+                                                <td> {{ $information->gender }}</td>
+                                                @php
+                                                    $birthdate = new DateTime($information->date_of_birth);
+                                                    $today = new DateTime();
+                                                    $age = $today->diff($birthdate)->y;
+                                                @endphp
+                                                <td>{{ $age }}</td>
+                                                <td>{{ $information->date_of_birth }}</td>
+                                                <td>{{ $information->place_of_birth }}</td>
+                                                <td>{{ $information->nationality }}</td>
+                                                <td>{{ $information->religion }}</td>
+                                                <td>{{ $information->civil_status }}</td>
+                                            </tr>
+                               
+                                        </tbody>
+                                    </table>
+
+                                    <table class="table table-striped table-bordered" id="user_data">
+                                        <h3>Contact Information</h3>
+                                        <thead>
+                                            <tr>
+                                                <th>Contact Number</th>         
+                                                <th>Email</th>
+                                                <th>Address</th>
+                                                <th>Provincial Address</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr>
+                                                <td>{{ $contact->contact_number }}</td>
+                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $contact->house_number }} {{ $contact->street_name }} {{ $contact->barangay_name }} {{ $contact->city_name }}</td>
+                                                <td>{{ $contact->prov_house_number }} {{ $contact->prov_street_name }} {{ $contact->prov_barangay_name }} {{ $contact->prov_city_name }} {{ $contact->prov_name }}</td>
+                                            </tr>
+                               
+                                        </tbody>
+                                    </table>
+
+                                    <table class="table table-striped table-bordered" id="user_data">
+                                        <h3>Makatizen Information</h3>
+                                        <thead>
+                                            <tr>
+                                                <th>Registered Voter?</th>
+                                                <th>Head of Household?</th>
+                                                <th>Social Sector</th>
+                                                <th>Vaccine Status</th>
+                                                <th>No. Years in Makati</th>
+                                                <th>No. Years in Barangay Cembo</th>
+                                                <th>No. Years in Current Address</th>
+                                                <th>Relationship to the Head of Family</th>
+                                                <th>Cards Owned</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr>
+                                                <td>{{ $makatizen->registered_voter ? 'Yes' : 'No' }}</td>
+                                                <td>{{ $makatizen->head_of_household ? 'Yes' : 'No' }}</td>
+
+                                                <td>{{ $makatizen->social_sector }}</td>
+                                                <td>{{ $makatizen->vaccine_status }}</td>
+                                                <td>{{ $makatizen->years_makati }}</td>
+                                                <td>{{ $makatizen->years_barangay_cembo }}</td>
+                                                <td>{{ $makatizen->years_current_address }}</td>
+                                                <td>{{ $makatizen->relationship_head_family }}</td>
+                                                @if($makatizen->yellow_card || $makatizen->blue_card || $makatizen->white_card || $makatizen->makatizen_card || $makatizen->philhealth_card)
+                                                <td>{{ implode(', ', array_filter([card_name($makatizen->yellow_card, 'Yellow Card'), card_name($makatizen->blue_card, 'Blue Card'), card_name($makatizen->white_card, 'White Card'), card_name($makatizen->makatizen_card, 'Makatizen Card'), card_name($makatizen->philhealth_card, 'PhilHealth Card')] )) }}</td>
+                                                @endif
+
+                                                @php
+                                                function card_name($value, $name) {
+                                                switch ($value) {
+                                                    case 1:
+                                                    return $name;
+                                                    default:
+                                                    return null;
+                                                }
+                                                }
+                                                @endphp
+                                            </tr> 
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </main>
+            <!-- Footer -->
         </div>
-    </div>
-</x-app-layout>
+    </body>
+</html>
+
+<!-- Optional JavaScript -->
+<script src="{{ asset('storage/javascripts/admin_homepage.js') }}"></script>
+
+<!--* BOOTSTRAP JS-->
+<script src="{{ asset('storage/javascripts/bootstrap.min.js') }}"></script>
+
+
+   
+

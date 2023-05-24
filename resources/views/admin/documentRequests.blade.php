@@ -39,8 +39,7 @@
                                                 <th>Document Requested</th>
                                                 <th>Barangay ID</th>
                                                 <th>Link</th>
-                                                <th class="text-center">Status</th>
-                                                <th class="text-center">Notify</th>
+                                                <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -52,22 +51,6 @@
                                                     <a href="{{ route('admin.documentShow', ['id' => $request->id]) }}" class="text-blue-600 hover:text-blue-900 mb-2 mr-2" >View Details</a>
                                                 </td>
                                                 <td>{{ $request->status }}</td>
-                                                <td style="display: flex;justify-content: space-evenly;align-items: stretch;">
-                                                    <form action="{{ route('requestApproved.send', $request->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <input type="hidden" name="status" value="approved">
-                                                        <input type="submit" class="btn btn-success btn-sm float-end" value="Approve" 
-                                                        >
-                                                    </form>
-                                                    <form action="{{ route('requestDenied.send', $request->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <input type="hidden" name="status" value="denied">
-                                                        <input type="submit" class="btn btn-warning btn-sm float-end" value="Reject" 
-                                                        >
-                                                    </form> 
-                                                </td>
                                             </tr>
                                         @endforeach
                                         </tbody>

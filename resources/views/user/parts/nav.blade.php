@@ -2,7 +2,7 @@
     <div class="container-fluid" id="nav">
         <div class="navbar-toggler d-sm-block d-lg-none d-md-none" type="button" data-bs-toggle="collapse"
             data-bs-target="#collapsibleNavbar" id="logo-container">
-            <img src="{{ asset('res/img/logo/logo.png') }}" class="img-fluid rounded-circle" id="logo">
+            <img src="{{ asset('storage/res/img/logo/logo.png') }}" class="img-fluid rounded-circle" id="logo">
         </div>
 
         <div class="container-fluid d-lg-block d-md-block d-sm-none d-none" id="logo-container">
@@ -13,7 +13,7 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" href="/" id="nav-active-link">Home</a>
                     </li>
                     @auth
                     <li class="nav-item">

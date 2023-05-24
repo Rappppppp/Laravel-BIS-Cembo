@@ -46,7 +46,8 @@
                                             <tr>
                                                 <td><a href="{{ route('admin.show', $request->user->id) }}">{{ $request->name_of_respondent }}</a></td>
                                                 <td>{{ $request->nature_of_complaint }}</td>
-                                                <td>{{ route('admin.documentShow', ['id' => $request->id]) }}</td>
+                                                <td><a href="{{ route('admin.complaintShow', ['id' => $request->id]) }}" target="
+                                                _blank">View</a></td>
                                                 <td>{{ $request->status }}</td>
                                                 <td style="display: flex;justify-content: space-evenly;align-items: stretch;">
                                                     <form action="{{ route('complaintApproved.send', $request->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">

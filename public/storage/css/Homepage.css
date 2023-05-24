@@ -77,11 +77,13 @@ body {
 .nav-link {
     color: var(--quarternary-color);
     border-bottom: 5px solid transparent;
+    border-radius: 5px;
 }
 
 .nav-item :hover {
     color: var(--primary-color);
     background-color: var(--quarternary-color);
+    border-radius: 5px;
 }
 
 .nav-item {
@@ -127,10 +129,11 @@ body {
 }
 
 #post-container {
+    border: 3px solid #FCC422;
     padding: 0px;
     border-radius: 10px;
     margin-top: 2%;
-    background-color: #04091DBF;
+    background-color: #1E1E1E;
     color: white;
     height: 100%;
 }

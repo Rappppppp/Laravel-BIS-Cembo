@@ -1,7 +1,7 @@
 .wrapper {
     box-sizing: border-box;
     position: relative;
-    padding-bottom: 150px;
+    padding-bottom: 0px;
     /* Height of footer */
     min-height: 100%;
 }

@@ -36,7 +36,7 @@ class ComplaintController extends Controller
         $complaint->save();
 
         // Process form submission
-        return redirect()->route('complaints')->with('success', 'Your document request has been submitted successfully.');
+        return redirect()->route('complaints')->with('success', 'Your complaint has been successfully sent to the Barangay Officials.');
 
     }
 

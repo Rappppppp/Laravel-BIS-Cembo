@@ -61,6 +61,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'profile_photo_url',
     ];
 
+    public function scopeSearch($q)
+    {
+        return empty(request()->search) ? $q : $q->where('name', 'like', '%' . request()->search . '%');
+    }
+
     public function personalInformation()
     {
         return $this->hasOne(PersonalInformationModel::class);

@@ -33,13 +33,13 @@
 								<div class="row" id="field">
 									<input type="password" name="password" placeholder="Password">
 								</div>
-                @if ($errors->any())
-                  <div class="text-danger">
-                    @foreach ($errors->all() as $error)
-                      {{ $error }}
-                    @endforeach
-                  </div>
-                @endif
+								@if ($errors->any())
+								<div class="text-danger">
+									@foreach ($errors->all() as $error)
+									{{ $error }}
+									@endforeach
+								</div>
+								@endif
 							</div>
 						</div>
 						<div class="row">

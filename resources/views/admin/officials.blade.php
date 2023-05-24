@@ -11,6 +11,7 @@
             }
 
             #portrait-holder {
+                height: 100%;
                 align-self: center;
                 text-align: center;
                 align-content: center;
@@ -52,23 +53,30 @@
                             {{ session('error') }}
                         </div>
                     @endif
-                    <div class="parallax-bg-img" style="background-image: url('{{ asset('storage/images/Rectangle 109.png') }}');">
+                    <div class="parallax-bg-img" style="background-image: url('{{ asset('storage/images/Rectangle 109.png') }}'); padding-bottom: 5%;">
                         <div class="container-fluid pb-0" id="officials">
                             <div class="text-white">
                                 <!-- START: This form should be hidden -->
-                                <form action="{{ route('admin.officials.add') }}" method="POST" onsubmit="return confirm('Add a Barangay Official?');">
+                                <form action="{{ route('admin.officials.add') }}" method="POST" enctype="multipart/form-data" onsubmit="return confirm('Add a Barangay Official?');">
                                     @csrf
                                     <select name="official_name">
-                                        @foreach($officials as $official)
-                                            <option value="{{ $official['name'] }}">{{ $official['name'] }}</option>
-                                        @endforeach
-                                    </select>  
-                                    <select name="official_title">
-                                        <option value='Punong Barangay'>Punong Barangay</option>
-                                        <option value='Barangay Kagawad'>Barangay Kagawad</option>
-                                        <option value='SK Chairperson'>SK Chairperson</option>
-                                        <option value='SK Kagawad'>SK Kagawad</option>
-                                    </select>
+                                    @foreach($officials as $official)
+                                        <option value="{{ $official['name'] }}">{{ $official['name'] }}</option>
+                                    @endforeach
+                                </select>
+
+                                <select name="official_title">
+                                    @php
+                                        $existing_officials = $addedOfficials->pluck('position')->toArray();
+                                    @endphp    
+                                    <option value='Punong Barangay' @if(in_array('Punong Barangay', $existing_officials)) disabled @endif>Punong Barangay</option>
+                                    <option value='Barangay Kagawad'>Barangay Kagawad</option>
+                                    <option value='SK Chairperson' @if(in_array('SK Chairperson', $existing_officials)) disabled @endif>SK Chairperson</option>
+                                    <option value='SK Kagawad'>SK Kagawad</option>
+                                </select>
+
+                                    <br>
+                                    <input type="file" name="official_photo" accept=".png, .jpg, .jpeg">
                                     <br>
                                     <button class="button btn-warning btn add" type='submit'>Add</button>
                                 </form>
@@ -84,7 +92,7 @@
                                         <div class="card" id="portrait-holder">
                                             <img class="card-img-top"
                                                 style="background-color: var(--secondary-color);"
-                                                src="{{ $official['photo'] }}"
+                                                src="{{ asset(str_replace('public/', '', 'storage/' . $official->photo)) }}"
                                                 onerror="javascript:this.src='{{ asset('storage/images/blank_profile_pic.webp') }}'" 
                                                 >
                                             <div class="card-body pt-0">
@@ -96,14 +104,13 @@
                                                 <h3>  {{ $official->name }}</h3>
                                             </div>
                                             <div class="mb-2">
-                                            <form action="{{ route('admin.officials.remove', ['id' => $official->id]) }}" method="POST" onsubmit="return confirm('Do you want to remove this Barangay official?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <input type="submit" class="button btn btn-danger" value="Remove">
-                                            </form> 
+                                                <form action="{{ route('admin.officials.remove', ['id' => $official->id]) }}" method="POST" onsubmit="return confirm('Do you want to remove this Barangay official?');" class="d-inline-block">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input type="submit" class="button btn btn-danger" value="Remove">
+                                                </form> 
 
-                                                <button class="button btn btn-warning"
-                                                    >Edit</button>
+                                                <button class="button btn btn-warning d-inline-block">Edit</button>
                                             </div>
                                         </div>
                                     </div>

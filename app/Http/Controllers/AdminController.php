@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BarangayOfficialsModel;
 use App\Models\ComplaintModel;
+use App\Models\ContactInformationModel;
 use App\Models\DocumentModel;
 use App\Models\MakatizenRegistryModel;
 use App\Models\PersonalInformationModel;
@@ -13,20 +14,33 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    // User
+    // Residents Table
     public function index()
     {
-        $users = User::all(); //where('role', '!=', 'Admin')->where('role', '!=', 'Barangay Official')->get();
-        return view('admin.index', compact('users'));
+        $users = User::search()
+            ->orderBy('name')
+            ->paginate(20)
+            ->where('role', '!=', 'Admin');
+
+        // Get the sum data of number of household, families household and number of users registered.
+        $makatizen_infos = MakatizenRegistryModel::select('num_household', 'num_families_household')->get();
+        $userCount = PersonalInformationModel::count();
+        $householdCount = $makatizen_infos->sum('num_household');
+        $familiesCount = $makatizen_infos->sum('num_families_household');
+        return view('admin.index', compact('users', 'userCount', 'householdCount', 'familiesCount'));
     }
 
     public function show($id)
     {
         $user = User::find($id);
         $information = PersonalInformationModel::where('user_id', $id)->first();
+        $contact = ContactInformationModel::where('user_id', $id)->first();
+        $makatizen = MakatizenRegistryModel::where('user_id', $id)->first();
         return view('admin.show')
             ->with('user', $user)
-            ->with('information', $information);
+            ->with('information', $information)
+            ->with('contact', $contact)
+            ->with('makatizen', $makatizen);
     }
 
     public function destroy($id)
@@ -56,6 +70,14 @@ class AdminController extends Controller
         return view('admin.documentShow')->with('request', $document);
     }
 
+    public function complaintShow($id)
+    {
+        $complaint = ComplaintModel::join('users', 'users.id', '=', 'complaints.user_id')
+            ->select('complaints.*', 'users.name')
+            ->find($id);
+        return view('admin.complaintShow')->with('request', $complaint);
+    }
+
     // Complaints
     public function complaintRequests()
     {
@@ -76,13 +98,21 @@ class AdminController extends Controller
         return view('admin.officials', compact('officials', 'addedOfficials'));
     }
 
-    public function addBarangayOfficials(Request $inputs)
+    public function addBarangayOfficials(Request $request)
     {
-        BarangayOfficialsModel::create([
-            'name' => $inputs['official_name'],
-            'position' => $inputs['official_title'],
-            //'photo' => $inputs['official_photo']
-        ]);
+        if ($request->hasFile('official_photo') && $request->file('official_photo')->isValid()) {
+            $path = $request->file('official_photo')->store('public/official_photos');
+            BarangayOfficialsModel::create([
+                'name' => $request['official_name'],
+                'position' => $request['official_title'],
+                'photo' => $path
+            ]);
+        } else {
+            BarangayOfficialsModel::create([
+                'name' => $request['official_name'],
+                'position' => $request['official_title'],
+            ]);
+        }
 
         return redirect()->route('admin.officials')->with('success', 'Barangay Official Successfuly Added!');
     }

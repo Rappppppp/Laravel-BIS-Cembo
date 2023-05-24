@@ -140,6 +140,7 @@ new Chart(chart_cards, {
     data: {
         labels: ['Yellow Card', 'Blue Card', 'White Card', 'Makatizen Card', 'Philhealth'],
         datasets: [{
+            label: "",
             data: [yellow, blue, white, makatizen, philhealth],
             backgroundColor: bgColor,
             borderColor: bColor,
@@ -149,6 +150,7 @@ new Chart(chart_cards, {
     options: {
         responsive: true,
         maintainAspectRatio: false,
+        skipNull: true,
         scales: {
             y: {
                 beginAtZero: true,

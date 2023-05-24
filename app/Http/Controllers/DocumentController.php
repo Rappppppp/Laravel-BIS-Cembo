@@ -68,6 +68,7 @@ class DocumentController extends Controller
                     'relationship' => $validated['relationship'],
                     'stnum' => $validated['stnum'],
                     'stadd' => $validated['stadd'],
+                    'brgy' => $validated['brgy'],
                     'city' => $validated['city'],
                     'province' => $validated['province'],
                     'contact_number' => $validated['contact_number']
@@ -98,13 +99,11 @@ class DocumentController extends Controller
     public function destroy(DocumentModel $document)
     {
         $document->delete();
-        return redirect()->route('admin.documentRequests');
+        return redirect()->route('admin.documentRequests')->with('success', 'Request Deleted Successfuly!');
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
-
 }

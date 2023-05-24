@@ -26,19 +26,19 @@
                         <div class="card">
                             <div class="card-header" id="message">
                             <div class="block mb-8">
-                        <form class="d-inline-block" action="{{ route('documents.delete', $request->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
+                        <form class="d-inline-block" action="" method="POST" onsubmit="return confirm('Are you sure?');">
                             @csrf
                             @method('DELETE')
                             <a class="text-dark btn" href="{{ url()->previous() }}">Back to list</a>
                             <input type="submit" class="btn btn-danger ml-2" value="Delete">
                         </form>  
-                        <form class="d-inline-block" action="{{ route('requestApproved.send', $request->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to approve this request?');">
+                        <form class="d-inline-block" action="" method="POST" onsubmit="return confirm('Are you sure you want to approve this request?');">
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="status" value="approved">
                             <input type="submit" class="btn btn-success ml-2" value="Approve">
                         </form>
-                        <form class="d-inline-block" action="{{ route('requestDenied.send', $request->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to reject this request?');">
+                        <form class="d-inline-block" action="" method="POST" onsubmit="return confirm('Are you sure you want to reject this request?');">
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="status" value="denied">
@@ -55,33 +55,31 @@
                                     <table class="table table-striped table-bordered" id="user_data">
                                         <thead>
                                             <tr>
-                                                <th>Requestor</th>
+                                                <th>Reporter</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>{{ $request->name }}</td>
+                                                <td>{{ $request->name_of_respondent }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
 
                                     <table class="table table-striped table-bordered" id="user_data">
-                                        <h3>Emergency Contact Details</h3>
+                                        <h3>Complaint Details</h3>
                                         <thead>
                                             <tr>
-                                                <th>Contact Person</th>
-                                                <th>Relationship</th>
-                                                <th>Contact Number</th>
-                                                <th>Address</th>
+                                                <th>Nature of Complaint</th>
+                                                <th>Location</th>
+                                                <th>Description</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 
                                             <tr>
-                                                <td>{{ $request->inputs['contact_person'] }}</td>
-                                                <td>{{ $request->inputs['relationship'] }}</td>
-                                                <td>{{ $request->inputs['contact_number'] }}</td>
-                                                <td>{{ $request->inputs['stnum'] }} {{ $request->inputs['stadd'] }} {{ $request->inputs['brgy'] }}, {{ $request->inputs['city'] }}, {{ $request->inputs['province'] }}</td>
+                                                <td>{{ $request->nature_of_complaint }}</td>
+                                                <td>{{ $request->location }}</td>
+                                                <td>{{ $request->description }}</td>
                                             </tr>
                                
                                         </tbody>
@@ -92,8 +90,8 @@
                                         <tbody>
 
                                             <td>
-                                                <a href="{{ asset(str_replace('public/', '', 'storage/' . $request->document_path)) }}" target="_blank">
-                                                    <img src="{{ asset(str_replace('public/', '', 'storage/' . $request->document_path)) }}" alt="Uploaded Image" style="width: 100%;">
+                                                <a href="{{ asset(str_replace('public/', '', 'storage/' . $request->supporting_evidence)) }}" target="_blank">
+                                                    <img src="{{ asset(str_replace('public/', '', 'storage/' . $request->supporting_evidence)) }}" alt="Uploaded Image" style="width: 100%;">
                                                 </a>
                                             </td>
                             

@@ -1,0 +1,5 @@
+Admin Dashboard
+    -n of residents, household, families 
+    -n of requests and complaints
+    -heatmap for requests and complaints (kung ilan may maraming requests or complaints)
+    -

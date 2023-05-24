@@ -1,293 +1,277 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-@include('user.parts.headlib')
-    <link rel="stylesheet" href="{{ asset('storage/stylesheets/about_us.css') }}">
-    <link rel="stylesheet" href="{{ asset('storage/stylesheets/about_us_main.css') }}">
-    <link rel="stylesheet" href="{{ asset('storage/stylesheets/about_us_footer.css') }}">
 
-    <body style="background-color: #375778;">
-        <div class="wrapper">
-        @include('user.parts.header')
-                <!-- ***** Main Banner Area Start ***** -->
-                <div class="main-banner" id="top">
-                    <video autoplay muted loop id="bg-video">
-                        <source src="{{ asset('storage/images/Makat-City-Drone-shot.mp4') }}" type="video/mp4" />
-                    </video>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About us</title>
+    <link href="{{ asset('storage/node_modules/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('storage/css/Aboutus.css') }}" rel="stylesheet">
+</head>
 
-                    <div class="video-overlay header-text">
-                        <div class="caption">
-                            <h6>Official Website of <em>Brgy. Cembo</em></h6>
-                            <h2>About us</h2>
-                            <div class="main-button scroll-to-section">
-                                <a href="https://www.makati.gov.ph/barangay/cembo/10" target="_blank">LEARN MORE</a>
+<body>
+    <div class="wrapper"> <!-- Fixes Footer to Bottom -->
+        <!-- Nav -->
+        @include('user.parts.nav')
+        <!-- Content -->
+        <main>
+            <div id="content">
+                <div class="parallax-bg-img" style="background-image: url('{{ asset('storage/res/img/bg/BG.png') }}'); min-height: 100vh;">
+                    <div class="container-fluid" id="intro-container">
+                        <span id="intro">About Us</span>
+                    </div>
+                    <hr id="spacer">
+                    <div class="container-fluid" id="content-container-a">
+                        <div class="container-fluid" id="title-container-a">
+                            <span id="title">Introduction</span>
+                        </div>
+                        <div class="container-fluid">
+                            <hr>
+                        </div>
+                        <div class="container-fluid" id="description-container-b">
+                            <span>Barangay Cembo is situated along the Pasig River and belongs to the Second District of
+                                Makati City. It is under the North East Cluster or Cluster 6 with Guadalupe Viejo, West
+                                Rembo and Northside. Based on the 2015 Census of Population conducted by the Philippine
+                                Statistics Authority (PSA), Cembo has 26,213 total population and a percentage share of
+                                4.50%. By population density, on the other hand, considering its land area and
+                                population count, the barangay has 61 persons per 1,000 square meters.This barangay has
+                                a total land area of 426,700 square meters and it is predominantly residential. Cembo
+                                BLISS and the New Building of Makati Science High School are located within Barangay
+                                Cembo. </span>
+                        </div>
+                    </div>
+                    <div class="container-fluid" id="content-container-a">
+                        <div class="container-fluid" id="title-container-a">
+                            <span id="title">Vision</span>
+                        </div>
+                        <div class="container-fluid">
+                            <hr>
+                        </div>
+                        <div class="container-fluid" id="description-container-b">
+                            <span>Cembo, a popular acronym for Central Enlisted Men’s Barrio, has its beginning in 1949,
+                                when the first batch of enlisted servicemen from the Infantry Group, Philippine Ground
+                                Force, Florida Blanca, Pampanga arrived at the Fort William McKinley (now Fort
+                                Bonifacio). They were directed to settle at big rolling open tract of land adjacent to
+                                the North Gate (Gate I) which was mostly covered by a dense growth of cogon grass. The
+                                place was selected to be the site for the housing area of the enlisted personnel of the
+                                Philippine Ground Force.</span>
+                            <br><br>
+                            <span>As the bulk of the whole command came later, the housing area became congested. M/Sgt.
+                                Teofilo Bautista, the barrio Lieutenant and Assistant Reservation Officer, was directed
+                                by the higher headquarter offices to lead a survey team for the location of the
+                                unoccupied space in the vast sprawling reservation thus West Rembo was created.
+                                Subsequently, the other barrios were created like the East Rembo, Comembo, and Pembo to
+                                accommodate the increasing population of the military personnel.</span>
+                        </div>
+                    </div>
+                    <hr id="spacer">
+                    <div class="container-fluid" id="content-container-c">
+                        <span id="intro">Our Values</span>
+                    </div>
+                    <hr id="spacer">
+                    <div class="container-fluid" id="content-container-a">
+                        <div class="container-fluid" id="title-container-a">
+                            <span id="title">Mission</span>
+                        </div>
+                        <div class="container-fluid">
+                            <hr>
+                        </div>
+                        <div class="container-fluid" id="description-container-b">
+                            <span>Barangay Cembo to be a safe and secured place to live in for its constituents and
+                                other stakeholders will advocate and provide continuous information dissemination and
+                                intensified actions and programs on the social, economic, infrastructure, environmental
+                                management and institutional sectors.</span>
+                        </div>
+                    </div>
+                    <div class="container-fluid" id="content-container-a">
+                        <div class="container-fluid" id="title-container-a">
+                            <span id="title">Vision</span>
+                        </div>
+                        <div class="container-fluid">
+                            <hr>
+                        </div>
+                        <div class="container-fluid" id="description-container-b">
+                            <span>Barangay Cembo to be livable and disaster resilient community with safe and secured
+                                environment for its God-loving, productive and responsible citizens who will enjoy easy
+                                access to employment opportunities and basic services through the efficient and
+                                excellent public service of its leaders.</span>
+                        </div>
+                    </div>
+                    <hr id="spacer">
+                    <div class="container-fluid" id="content-container-c">
+                        <span id="intro">Meet the Crew</span>
+                    </div>
+                    <hr id="spacer">
+                    <div class="container-fluid" id="content-container-a">
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-6" id="portrait-container">
+                                <div class="container-fluid" id="polaroid">
+                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
+                                    </div>
+                                    <div class="container-fluid" id="name-container">
+                                        Adele
+                                    </div>
+                                    <div class="container-fluid" id="description-container-c">
+                                        The Quick Brown Fox Jumps Over The Lazy Dog
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6" id="portrait-container">
+                                <div class="container-fluid" id="polaroid">
+                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
+                                    </div>
+                                    <div class="container-fluid" id="name-container">
+                                        Adele
+                                    </div>
+                                    <div class="container-fluid" id="description-container-c">
+                                        The Quick Brown Fox Jumps Over The Lazy Dog
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6" id="portrait-container">
+                                <div class="container-fluid" id="polaroid">
+                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
+                                    </div>
+                                    <div class="container-fluid" id="name-container">
+                                        Adele
+                                    </div>
+                                    <div class="container-fluid" id="description-container-c">
+                                        The Quick Brown Fox Jumps Over The Lazy Dog
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6" id="portrait-container">
+                                <div class="container-fluid" id="polaroid">
+                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
+                                    </div>
+                                    <div class="container-fluid" id="name-container">
+                                        Adele
+                                    </div>
+                                    <div class="container-fluid" id="description-container-c">
+                                        The Quick Brown Fox Jumps Over The Lazy Dog
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <p class="main-courtesy">Courtesy:<em>Dada Koo</em></p>
+                    </div>
+                    <div class="container-fluid" id="content-container-a" style="padding-top: 0;">
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-6" id="portrait-container">
+                                <div class="container-fluid" id="polaroid">
+                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
+                                    </div>
+                                    <div class="container-fluid" id="name-container">
+                                        Adele
+                                    </div>
+                                    <div class="container-fluid" id="description-container-c">
+                                        The Quick Brown Fox Jumps Over The Lazy Dog
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6" id="portrait-container">
+                                <div class="container-fluid" id="polaroid">
+                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
+                                    </div>
+                                    <div class="container-fluid" id="name-container">
+                                        Adele
+                                    </div>
+                                    <div class="container-fluid" id="description-container-c">
+                                        The Quick Brown Fox Jumps Over The Lazy Dog
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6" id="portrait-container">
+                                <div class="container-fluid" id="polaroid">
+                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
+                                    </div>
+                                    <div class="container-fluid" id="name-container">
+                                        Adele
+                                    </div>
+                                    <div class="container-fluid" id="description-container-c">
+                                        The Quick Brown Fox Jumps Over The Lazy Dog
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6" id="portrait-container">
+                                <div class="container-fluid" id="polaroid">
+                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
+                                    </div>
+                                    <div class="container-fluid" id="name-container">
+                                        Adele
+                                    </div>
+                                    <div class="container-fluid" id="description-container-c">
+                                        The Quick Brown Fox Jumps Over The Lazy Dog
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid" id="content-container-a" style="padding-top: 0;">
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-6" id="portrait-container">
+                                <div class="container-fluid" id="polaroid">
+                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
+                                    </div>
+                                    <div class="container-fluid" id="name-container">
+                                        Adele
+                                    </div>
+                                    <div class="container-fluid" id="description-container-c">
+                                        The Quick Brown Fox Jumps Over The Lazy Dog
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6" id="portrait-container">
+                                <div class="container-fluid" id="polaroid">
+                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
+                                    </div>
+                                    <div class="container-fluid" id="name-container">
+                                        Adele
+                                    </div>
+                                    <div class="container-fluid" id="description-container-c">
+                                        The Quick Brown Fox Jumps Over The Lazy Dog
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6" id="portrait-container">
+                                <div class="container-fluid" id="polaroid">
+                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
+                                    </div>
+                                    <div class="container-fluid" id="name-container">
+                                        Adele
+                                    </div>
+                                    <div class="container-fluid" id="description-container-c">
+                                        The Quick Brown Fox Jumps Over The Lazy Dog
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6" id="portrait-container">
+                                <div class="container-fluid" id="polaroid">
+                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
+                                    </div>
+                                    <div class="container-fluid" id="name-container">
+                                        Adele
+                                    </div>
+                                    <div class="container-fluid" id="description-container-c">
+                                        The Quick Brown Fox Jumps Over The Lazy Dog
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!-- ***** Main Banner Area End ***** -->
-
-                <!-- ***** Testimonials Starts ***** -->
-                <!-- <section class="section pb-5" style="background-color: #fbd159;">
-                    <div class=" container">
-                        <div class="row row-officials-header">
-                            <div class="brgy-officials-header">
-                                <h1>Barangay Officials</h1>
-                            </div>
-                        </div>
-
-                        <div class="row" style="display: flex;justify-content: center;">
-                            <% brgy_captain.forEach((captain)=>{ %>
-                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                    <div class="card brgy-officials-item" id="portrait-holder">
-                                        <img class="card-img-top" src="data:image/png;base64,<%= captain.image %>"
-                                            style="background-color: var(--secondary-color)"
-                                            onerror="javascript:this.src='images/blank_profile_pic.webp'">
-                                        <div class="card-body pt-0">
-                                            <div class="container" id="namespace">
-                                                <h4>
-                                                    <%= captain.position %>
-                                                </h4>
-                                            </div>
-                                            <h3>
-                                                <%= captain.name %>
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <% }) %>
-                        </div>
-
-                        <div class="row lg-mt-5 md-mt-5 sm-mt-0">
-                            <% officials.forEach((official)=>{ %>
-                                <div class="col-lg-4 col-md-4 col-sm-12 mt-sm-5">
-                                    <div class="card brgy-officials-item" id="portrait-holder">
-                                        <img class="card-img-top" src="data:image/png;base64,<%= official.image %>"
-                                            style="background-color: var(--secondary-color)"
-                                            onerror="javascript:this.src='images/blank_profile_pic.webp'">
-                                        <div class="card-body pt-0">
-                                            <div class="container" id="namespace">
-                                                <h4>
-                                                    <%= official.position %>
-                                                </h4>
-                                            </div>
-                                            <h3>
-                                                <%= official.name %>
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <% }) %>
-                        </div>
-                </section> -->
-                <!-- ***** Testimonials Ends ***** -->
-
-                <!-- ***** Call to Action Start ***** -->
-                <section class="section" id="call-to-action">
-                    <div class="intro-history">
-                        <div class="container container-introduction">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="cta-content">
-                                        <h2><em>INTRODUCTION</em></h2>
-                                        <p><b>Barangay Cembo</b> is situated along the Pasig River and belongs to the
-                                            Second
-                                            District of Makati
-                                            City. It is under the North East Cluster or Cluster 6 with Guadalupe Viejo,
-                                            West
-                                            Rembo
-                                            and
-                                            Northside. Based on the 2015 Census of Population conducted by the
-                                            Philippine
-                                            Statistics
-                                            Authority (PSA), Cembo has 26,213 total population and a percentage share of
-                                            4.50%.
-                                            By
-                                            population density, on the other hand, considering its land area and
-                                            population
-                                            count,
-                                            the
-                                            barangay has 61 persons per 1,000 square meters.
-
-                                            This barangay has a total land area of 426,700 square meters and it is
-                                            predominantly
-                                            residential. Cembo BLISS and the New Building of Makati Science High School
-                                            are
-                                            located
-                                            within Barangay Cembo.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="container container-introduction mt-5">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="cta-content">
-                                        <h2><em>HISTORY</em></h2>
-                                        <p>Cembo, a popular acronym for <b>Central Enlisted Men’s Barrio</b>, has its
-                                            beginning
-                                            in
-                                            1949,
-                                            when the first batch of enlisted servicemen from the Infantry Group,
-                                            Philippine
-                                            Ground
-                                            Force, Florida Blanca, Pampanga arrived at the Fort William McKinley (now
-                                            Fort
-                                            Bonifacio). They were directed to settle at big rolling open tract of land
-                                            adjacent
-                                            to
-                                            the North Gate (Gate I) which was mostly covered by a dense growth of cogon
-                                            grass.
-                                            The
-                                            place was selected to be the site for the housing area of the enlisted
-                                            personnel
-                                            of
-                                            the
-                                            Philippine Ground Force.
-                                            <br><br>
-                                            As the bulk of the whole command came later, the housing area became
-                                            congested.
-                                            M/Sgt.
-                                            Teofilo Bautista, the barrio Lieutenant and Assistant Reservation Officer,
-                                            was
-                                            directed
-                                            by the higher headquarter offices to lead a survey team for the location of
-                                            the
-                                            unoccupied space in the vast sprawling reservation thus West Rembo was
-                                            created.
-                                            Subsequently, the other barrios were created like the East Rembo, Comembo,
-                                            and
-                                            Pembo
-                                            to
-                                            accommodate the increasing population of the military personnel.
-                                        </p>
-                                        <div class="main-button scroll-to-section">
-                                            <a href="www.makati.gov.ph/barangay/cembo/10" target="__blank">Read more</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- ***** Call to Action End ***** -->
-
-                <section class="section mission-vision" id="mission-vision-id">
-                    <div class="container">
-                        <div class="row row-introduction">
-                            <div class="col-12 ml-0 p-5">
-                                <div class="section-heading-text dark-bg">
-                                    <h2 style="text-align: center;">Mission</h2>
-                                    <hr style="background-color:white; width: 100%;">
-                                    <p class=" mt-3" style="text-align: center;"">Barangay Cembo to be a safe and secured place to live in for its constituents and other stakeholders will advocate and provide continuous information dissemination and intensified actions and programs on the social, economic, infrastructure, environmental management and institutional sectors.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        <div class=" col-12 mt-5 p-5">
-                                    <div class="section-heading-text dark-bg">
-                                        <h2 style="text-align: center;">Vision</h2>
-                                        <hr style="background-color:white; width: 100%;">
-                                        <p class=" mt-3" style="text-align: center;"">Barangay Cembo to be livable and disaster resilient community with safe and secured environment for its God-loving, productive and responsible citizens who will enjoy easy access to employment opportunities and basic services through the efficient and excellent public service of its leaders.</p>
-                                    </div>
-                                </div>
-                            </div>
-                </section>
-
-<!--                 
-                <section class=" section_devs" id="">
-                                        <div class="container_devs">
-                                            <h1>DEVELOPERS</h1>
-                                        </div>
-
-                                        <div class="container">
-                                            <div class="row">
-
-                                                <div class="col-lg-4 col-md-12 col-sm-12 card-dev-col">
-                                                    <div class="card img-fluid card-dev">
-                                                        <img class="card-img-top card-dev-image"
-                                                            src="images/Devs/Docot.jpg" alt="Card image">
-                                                        <div class="card-img-overlay">
-                                                            <h4 class="card-title card-dev-name">Raphael Docot</h4>
-                                                            <p class="card-dev-role">Website Back-end Lead</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="col-lg-4 col-md-12 col-sm-12 card-dev-col">
-                                                    <div class="card img-fluid card-dev">
-                                                        <img class="card-img-top" src="images/Devs/Traballo.jpg"
-                                                            alt="Card image">
-                                                        <div class="card-img-overlay">
-                                                            <h4 class="card-title card-dev-name">Darrel Traballo</h4>
-                                                            <p class="card-dev-role">Android Back-end Lead</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-4 col-md-12 col-sm-12 card-dev-col">
-                                                    <div class="card img-fluid card-dev">
-                                                        <img class="card-img-top" src="images/Devs/Bunayog.jpg"
-                                                            alt="Card image">
-                                                        <div class="card-img-overlay">
-                                                            <h4 class="card-title card-dev-name">Henson Bunayog</h4>
-                                                            <p class="card-dev-role">Website Front-end Lead</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-
-                                            <div class="row">
-
-                                                <div class="col-lg-4 col-md-12 col-sm-12 card-dev-col">
-                                                    <div class="card img-fluid card-dev">
-                                                        <img class="card-img-top card-dev-image"
-                                                            src="images/Devs/Verzosa.jpg" alt="Card image">
-                                                        <div class="card-img-overlay">
-                                                            <h4 class="card-title card-dev-name">Abigail Verzosa</h4>
-                                                            <p class="card-dev-role">Front-end Web Developer</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="col-lg-4 col-md-12 col-sm-12 card-dev-col">
-                                                    <div class="card img-fluid card-dev">
-                                                        <img class="card-img-top"
-                                                            src="https://source.unsplash.com/900x1600/?portrait"
-                                                            alt="Card image">
-                                                        <div class="card-img-overlay">
-                                                            <h4 class="card-title card-dev-name">Maureen Usman</h4>
-                                                            <p class="card-dev-role">Web Designer</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-4 col-md-12 col-sm-12 card-dev-col">
-                                                    <div class="card img-fluid card-dev">
-                                                        <img class="card-img-top"
-                                                            src="https://source.unsplash.com/900x1600/?portrait"
-                                                            alt="Card image">
-                                                        <div class="card-img-overlay">
-                                                            <h4 class="card-title card-dev-name">Pamela Kate Acedo</h4>
-                                                            <p class="card-dev-role">Android Designer</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                </section>
-                -->
-        </div>
-    </body>
+            </div>
+        </main>
+        <!-- Footer -->
+        <footer class="page-footer">
+            <div class="container-fluid" id="footer-footer">
+                <div class="container" id="bottom">
+                    <p>Copyright &copy; 2022</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
 
 </html>
-<!-- Bootstrap -->
-<script src="{{ asset('storage/javascripts/bootstrap.min.js') }}"></script>
