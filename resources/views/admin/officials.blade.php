@@ -60,18 +60,26 @@
                                 <form action="{{ route('admin.officials.add') }}" method="POST" enctype="multipart/form-data" onsubmit="return confirm('Add a Barangay Official?');">
                                     @csrf
                                     <select name="official_name">
+                                    @php
+                                        $existing_officials_name = $addedOfficials->pluck('name')->toArray();
+                                    @endphp    
+                                    
                                     @foreach($officials as $official)
-                                        <option value="{{ $official['name'] }}">{{ $official['name'] }}</option>
+                                        <option value="{{ $official['name'] }}" 
+                                        @if(in_array($official['name'], $existing_officials_name)) 
+                                            disabled 
+                                        @endif>{{ $official['name'] }}</option>
                                     @endforeach
+
                                 </select>
 
                                 <select name="official_title">
                                     @php
-                                        $existing_officials = $addedOfficials->pluck('position')->toArray();
+                                        $existing_officials_position = $addedOfficials->pluck('position')->toArray();
                                     @endphp    
-                                    <option value='Punong Barangay' @if(in_array('Punong Barangay', $existing_officials)) disabled @endif>Punong Barangay</option>
+                                    <option value='Punong Barangay' @if(in_array('Punong Barangay', $existing_officials_position)) disabled @endif>Punong Barangay</option>
                                     <option value='Barangay Kagawad'>Barangay Kagawad</option>
-                                    <option value='SK Chairperson' @if(in_array('SK Chairperson', $existing_officials)) disabled @endif>SK Chairperson</option>
+                                    <option value='SK Chairperson' @if(in_array('SK Chairperson', $existing_officials_position)) disabled @endif>SK Chairperson</option>
                                     <option value='SK Kagawad'>SK Kagawad</option>
                                 </select>
 
@@ -88,7 +96,7 @@
                                 <div class="row">
                                     <!--*BRGY OFFICIALS START-->
                                     @foreach($addedOfficials as $official)
-                                    <div class="col-lg-4 col-md-4 col-sm-3 mt-5">
+                                    <div class="col-lg-4 col-md-4 col-sm-12 mt-5">
                                         <div class="card" id="portrait-holder">
                                             <img class="card-img-top"
                                                 style="background-color: var(--secondary-color);"

@@ -68,7 +68,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function personalInformation()
     {
-        return $this->hasOne(PersonalInformationModel::class);
+        return $this->hasOne(PersonalInformationModel::class, 'user_id');
     }
 
     public function contactInformation()

@@ -48,6 +48,7 @@
                                                 <th>Nationality</th>
                                                 <th>Religion</th>
                                                 <th>Civil Status</th>
+                                                <th>Educational Attainment</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -67,6 +68,7 @@
                                                 <td>{{ $information->nationality }}</td>
                                                 <td>{{ $information->religion }}</td>
                                                 <td>{{ $information->civil_status }}</td>
+                                                <td>{{ $information->educational_attainment }}</td>
                                             </tr>
                                
                                         </tbody>

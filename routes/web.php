@@ -61,45 +61,53 @@ Route::middleware([
 
     });
 
-    $OfficlaAdminsRole = 'role:BarangayOfficial,Admin';
-    $admin = 'role:Admin';
+    $Official_Admin = 'role:Barangay Official,Admin';
+    $Admin = 'role:Admin';
 
-    // Admin / Brgy Official - Tables
+    // Admin / Brgy Official - User Tables
     Route::get('/admin', function () {
         return view('admin.index');
-    })->name('admin.index')->middleware('auth', $OfficlaAdminsRole);
-    Route::delete('/admin/delete/{id}', [AdminController::class, 'destroy'])->name('admin.delete');
+    })->name('admin.index')->middleware('auth', $Official_Admin);
+    // This part is only accessed by Admin
+    Route::get('/admin/get/{id}', [AdminController::class, 'getUser'])
+        ->middleware('auth', $Admin);
+    Route::put('/admin/update/{id}', [AdminController::class, 'updateUser'])
+        ->name('admin.user_update')
+        ->middleware('auth', $Admin);
+    Route::delete('/admin/delete/{id}', [AdminController::class, 'destroy'])
+        ->name('admin.delete')
+        ->middleware('auth', $Admin);
 
     // Charts
-    Route::get('/admin/charts', [AdminController::class, 'charts'])->name('admin.charts')->middleware('auth', $OfficlaAdminsRole);
+    Route::get('/admin/charts', [AdminController::class, 'charts'])->name('admin.charts')->middleware('auth', $Official_Admin);
 
-    // Add/Edit/Delete Barangay Officials
+    // Add/Edit/Delete Barangay Officials - Admin only
     Route::get('/admin/officials', [AdminController::class, 'barangayOfficials'])
         ->name('admin.officials')
-        ->middleware('auth', $OfficlaAdminsRole);
+        ->middleware('auth', $Admin);
     Route::post('/admin/officials/add', [AdminController::class, 'addBarangayOfficials'])
         ->name('admin.officials.add')
-        ->middleware('auth', $OfficlaAdminsRole); // Will switch back to admin
+        ->middleware('auth', $Admin); // Will switch back to admin
     Route::delete('/admin/officials/remove/{id}', [AdminController::class, 'removeBarangayOfficial'])
         ->name('admin.officials.remove')
-        ->middleware('auth', $OfficlaAdminsRole);
+        ->middleware('auth', $Admin);
 
     // Facebook Posts
-    Route::get('/admin/posts', [FacebookController::class, 'index'])->name('admin.posts')->middleware('auth', $OfficlaAdminsRole);
-    Route::post('/admin/posts/post', [FacebookController::class, 'addPosts'])->name('admin.posts.post')->middleware('auth', $OfficlaAdminsRole);
-    Route::delete('/admin/posts/{facebookID}', [FacebookController::class, 'deletePost'])->name('admin.posts.delete')->middleware('auth', $OfficlaAdminsRole);
+    Route::get('/admin/posts', [FacebookController::class, 'index'])->name('admin.posts')->middleware('auth', $Official_Admin);
+    Route::post('/admin/posts/post', [FacebookController::class, 'addPosts'])->name('admin.posts.post')->middleware('auth', $Official_Admin);
+    Route::delete('/admin/posts/{facebookID}', [FacebookController::class, 'deletePost'])->name('admin.posts.delete')->middleware('auth', $Official_Admin);
 
     // Document Requests
-    Route::get('/admin/document-requests', [AdminController::class, 'documentRequests'])->name('admin.documentRequests')->middleware('auth', $OfficlaAdminsRole);
+    Route::get('/admin/document-requests', [AdminController::class, 'documentRequests'])->name('admin.documentRequests')->middleware('auth', $Official_Admin);
     Route::put('/documents/update/{id}', [DocumentController::class, 'update'])->name('documents.update');
     Route::delete('/documents/{document}', [DocumentController::class, 'destroy'])->name('documents.delete');
-    Route::get('/admin/document-requests/{id}', [AdminController::class, 'documentShow'])->name('admin.documentShow')->middleware('auth', $OfficlaAdminsRole);
+    Route::get('/admin/document-requests/{id}', [AdminController::class, 'documentShow'])->name('admin.documentShow')->middleware('auth', $Official_Admin);
 
     // Complaint Requests
-    Route::get('/admin/complaint-requests', [AdminController::class, 'complaintRequests'])->name('admin.complaintRequests')->middleware('auth', $OfficlaAdminsRole);
+    Route::get('/admin/complaint-requests', [AdminController::class, 'complaintRequests'])->name('admin.complaintRequests')->middleware('auth', $Official_Admin);
     Route::put('/complaints/update/{id}', [ComplaintController::class, 'update'])->name('complaints.update');
     Route::delete('/complaints/{complaint}', [ComplaintController::class, 'destroy'])->name('complaints.delete');
-    Route::get('/admin/complaint-requests/{id}', [AdminController::class, 'complaintShow'])->name('admin.complaintShow')->middleware('auth', $OfficlaAdminsRole);
+    Route::get('/admin/complaint-requests/{id}', [AdminController::class, 'complaintShow'])->name('admin.complaintShow')->middleware('auth', $Official_Admin);
 
     // SEND EMAIL - COMPLAINTS
     Route::put('/complaintApproved/send/{id}', [NotifyEmailController::class, 'complaintApproved'])->name('complaintApproved.send');
@@ -108,7 +116,7 @@ Route::middleware([
     Route::put('/requestDenied/send/{id}', [NotifyEmailController::class, 'denied'])->name('requestDenied.send');
 
     // DONT REMOVE THIS LINE
-    Route::middleware(['auth', $OfficlaAdminsRole])->resource('admin', AdminController::class);
+    Route::middleware(['auth', $Official_Admin])->resource('admin', AdminController::class);
     // DONT REMOVE THIS LINE
 });
 

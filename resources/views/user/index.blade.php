@@ -19,12 +19,17 @@
             <div id="content">
                 <div class="parallax-bg-img" style="background-image: url('{{ asset('storage/res/img/bg/BG.png') }}');">
                     <div class="container-fluid" id="content-container">
-                        <div class="container" id="post-container">
                         @foreach($posts as $post)
+                        <div class="container" id="post-container">
+                       
                             <div class="row">
                                 <div class="col" style="padding: 30px;">
                                     <span>
-                                    @php
+                                    Posted by: 
+                                    </span>
+                                </div>
+                                <div class="col" style="padding: 30px; text-align: right;">
+                                @php
                                         $post_time = strtotime($post['created_time']);
                                         $current_time = time();
                                         $diff = $current_time - $post_time;
@@ -44,10 +49,7 @@
                                         }
                                     @endphp
 
-                                    Posted {{ $duration }} ago
-                                    </span>
-                                </div>
-                                <div class="col" style="padding: 30px; text-align: right;">
+                                    {{ $duration }} ago |
                                     <span>{{ date('h:i A', strtotime($post['created_time'])) }}</span>
                                 </div>
                             </div>
@@ -59,7 +61,8 @@
                                     adipiscing elit.</span>
                             </div>
                             <div class="row" style="padding: 20px; padding-top: 0;">
-                                <span>{{ $post['message'] }}<span style="color: #FCC422;"> More Info...</span></span>
+                                <span>{{ $post['message'] }}</span>
+                                <a href="{{ $post['permalink_url'] }}" target="_blank" style="color: #FCC422; text-decoration: none;">More Info...</a>
                             </div>
                             <div class="row">
                                 <img src="{{ $post['full_picture'] }}" class="img-fluid" id="image-content">
@@ -67,8 +70,8 @@
                             <div class="row" style="padding: 20px;">
                                 <span>Tags: Lorem, Ipsum, Dolor, Sit, Amet.</span>
                             </div>
-                        @endforeach
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

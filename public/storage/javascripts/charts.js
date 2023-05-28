@@ -19,7 +19,7 @@ const bColor = [
 // Use the variables in your Chart.js configuration
 const chart_gender = document.getElementById('gender')
 new Chart(chart_gender, {
-    type: 'polarArea',
+    type: 'pie',
     data: {
         labels: ['MALE', 'FEMALE', 'LESBIAN', 'GAY', 'OTHERS'],
         datasets: [{
@@ -42,7 +42,7 @@ new Chart(chart_gender, {
 
 const chart_age = document.getElementById('ages')
 new Chart(chart_age, {
-    type: 'radar',
+    type: 'pie',
     data: {
         labels: ['<=14', '15-17', '15-30', '18-59', '>=60'],
         datasets: [{

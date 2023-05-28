@@ -47,7 +47,7 @@
                     <div class="container-fluid" id="content-container-b">
                         <div class="row">
                             <div class="col-lg-3 col-sm-6" id="description-container-a">
-                                <img src="{{ asset('storage/res/img/sample/tree-planting.jpg') }}" class="d-lg-none d-md-none d-sm-block" id="image-for-small">
+                                <img src="{{ asset('storage/res/img/sample/consulation.jpg') }}" class="d-lg-none d-md-none d-sm-block" id="image-for-small">
                                 <span style="font-size: 28px; font-weight: bold;">HEALTH CENTER</span>
                                 <hr>
                                 <span>Serve as the frontliners in the barangay in providing basic health services. They
@@ -61,13 +61,13 @@
                                 <span>The tree planting activity aims to raise awareness to the society in the importance of planting and saving trees, this will express our concern to the environment, and diminish the unfavorable effects of climate change</span>
                             </div>
                             <div class="col-lg-3 col-sm-6" id="description-container-a">
-                                <img src="{{ asset('storage/res/img/sample/tree-planting.jpg') }}" class="d-lg-none d-md-none d-sm-block" id="image-for-small">
+                                <img src="{{ asset('storage/res/img/sample/fire-dept1.jpg') }}" class="d-lg-none d-md-none d-sm-block" id="image-for-small">
                                 <span style="font-size: 28px; font-weight: bold;">FIRE DEPARTMENT</span>
                                 <hr>
                                 <span>Rescue is the most important function of every fire department. From day one in recruit school, firefighters are programmed that life safety is the number one priority. Rescues are situations where firefighters promise</span>
                             </div>
                             <div class="col-lg-3 col-sm-6" id="description-container-a">
-                                <img src="{{ asset('storage/res/img/sample/tree-planting.jpg') }}" class="d-lg-none d-md-none d-sm-block" id="image-for-small">
+                                <img src="{{ asset('storage/res/img/sample/maintenance.jpg') }}" class="d-lg-none d-md-none d-sm-block" id="image-for-small">
                                 <span style="font-size: 28px; font-weight: bold;">Lorem Ipsum</span>
                                 <hr>
                                 <span>Serve as the frontliners in the barangay in providing basic health services. They

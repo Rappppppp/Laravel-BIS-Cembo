@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->text('message')->nullable();
             $table->text('full_picture');
             $table->text('created_time');
+            $table->text('permalink_url');
             $table->timestamps();
         });
     }

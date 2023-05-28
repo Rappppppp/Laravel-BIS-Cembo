@@ -16,5 +16,6 @@ class FacebookPostsModel extends Model
         'message',
         'full_picture',
         'created_time',
+        'permalink_url'
     ];
 }

@@ -52,6 +52,7 @@
                                                             <input type="hidden" name="message" value="{{ $post['message'] }}">
                                                             <input type="hidden" name="full_picture" value="{{ $post['full_picture'] }}">
                                                             <input type="hidden" name="created_time" value="{{ $post['created_time']->format('Y-m-d H:i:s') }}">
+                                                            <input type="hidden" name="link" value="{{ $post['permalink_url'] }}">
                                                             <input type="submit" class="btn btn-success" value="Post"/>
                                                     </form><br>
                                                     <form action="{{ route('admin.posts.delete', [$post['id']]) }}" method="POST" onsubmit="return confirm('Do you want to delete this post?');">

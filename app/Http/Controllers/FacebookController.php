@@ -24,7 +24,7 @@ class FacebookController extends Controller
 
         try {
             #permalink_url
-            $response = $fb->get('/105924955825559/feed?fields=full_picture,message,created_time');
+            $response = $fb->get('/105924955825559/feed?fields=full_picture,message,created_time,permalink_url');
             $graphEdge = $response->getGraphEdge();
             $posts = $graphEdge->asArray();
         } catch (\Facebook\Exceptions\FacebookResponseException $e) {
@@ -43,7 +43,7 @@ class FacebookController extends Controller
             'message' => $input['message'],
             'full_picture' => $input['full_picture'],
             'created_time' => $input['created_time'],
-            // 'permalink_url' => $input['link']
+            'permalink_url' => $input['link']
         ]);
 
         return redirect()->route('admin.posts')->with('success', 'Facebook post successfuly added!');

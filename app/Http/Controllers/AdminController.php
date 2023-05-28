@@ -11,6 +11,7 @@ use App\Models\PersonalInformationModel;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class AdminController extends Controller
 {
@@ -30,17 +31,74 @@ class AdminController extends Controller
         return view('admin.index', compact('users', 'userCount', 'householdCount', 'familiesCount'));
     }
 
+    public function getUser(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $information = PersonalInformationModel::where('user_id', $id)->first();
+        // $contact = ContactInformationModel::where('user_id', $id)->first();
+        // $makatizen = MakatizenRegistryModel::where('user_id', $id)->first();
+
+        $data = [
+            'user' => $user,
+            'information' => $information,
+            // 'contact' => $contact,
+            // 'makatizen' => $makatizen,
+        ];
+
+        // No view, just ajax request
+        if ($request->ajax()) {
+            return Response::json($data);
+        }
+
+        // return view('admin.edit', compact('user', 'information', 'contact', 'makatizen'));
+    }
+
+    public function updateUser(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $information = PersonalInformationModel::where('user_id', $id)->first();
+
+        // Check if the fetched data and input data are different
+        $isUserDataChanged =
+            $user->name !== $request->input('f_name') . " " . $request->input('m_name') . " " . $request->input('l_name');
+        $isRoleChanged = $user->role !== $request->input('role');
+        $isInformationChanged =
+            $information->first_name !== $request->input('f_name') ||
+            $information->middle_name !== $request->input('m_name') ||
+            $information->last_name !== $request->input('l_name') ||
+            $information->civil_status !== $request->input('civil_status') ||
+            $information->religion !== $request->input('religion') ||
+            $information->educational_attainment !== $request->input('educational_attainment');
+
+        if ($isUserDataChanged || $isRoleChanged || $isInformationChanged) {
+            $user->update([
+                'name' => $request->input('f_name') . " " . $request->input('m_name') . " " . $request->input('l_name'),
+                'role' => $request->input('role')
+            ]);
+
+            $information->update([
+                'first_name' => $request->input('f_name'),
+                'middle_name' => $request->input('m_name'),
+                'last_name' => $request->input('l_name'),
+                'civil_status' => $request->input('civil_status'),
+                'religion' => $request->input('religion'),
+                'educational_attainment' => $request->input('educational_attainment'),
+            ]);
+
+            return redirect()->back()->with('success', 'User updated successfully');
+        } else {
+            return redirect()->back()->with('info', 'No changes made');
+        }
+    }
+
+
     public function show($id)
     {
         $user = User::find($id);
         $information = PersonalInformationModel::where('user_id', $id)->first();
         $contact = ContactInformationModel::where('user_id', $id)->first();
         $makatizen = MakatizenRegistryModel::where('user_id', $id)->first();
-        return view('admin.show')
-            ->with('user', $user)
-            ->with('information', $information)
-            ->with('contact', $contact)
-            ->with('makatizen', $makatizen);
+        return view('admin.show', compact('user', 'information', 'contact', 'makatizen'));
     }
 
     public function destroy($id)
@@ -94,12 +152,15 @@ class AdminController extends Controller
     public function barangayOfficials()
     {
         $addedOfficials = BarangayOfficialsModel::all();
-        $officials = User::where('role', '=', 'Official')->get();
+        $officials = User::where('role', '=', 'Barangay Official')->get();
         return view('admin.officials', compact('officials', 'addedOfficials'));
     }
 
     public function addBarangayOfficials(Request $request)
     {
+        if ($request['official_name'] == '')
+            return redirect()->route('admin.officials')->with('error', "Error Can't Barangay Official!");
+
         if ($request->hasFile('official_photo') && $request->file('official_photo')->isValid()) {
             $path = $request->file('official_photo')->store('public/official_photos');
             BarangayOfficialsModel::create([
@@ -279,7 +340,7 @@ class AdminController extends Controller
                 case 'Single Dose':
                     $singleDoseCount++;
                     break;
-                case 'Fully Vaccinated':
+                case 'Fully vaccinated':
                     $vaccinatedCount++;
                     break;
                 case 'Vaccine Exempt':

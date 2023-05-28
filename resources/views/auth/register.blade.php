@@ -48,7 +48,7 @@ $nationals = array('Afghan','Albanian','Algerian','American','Andorran','Angolan
 									<input type="text" name="last_name" placeholder="Last Name" >
 								</div>
 								<div class="row" id="field">
-									<input type="text" name="email" placeholder="Email Address" >
+									<input type="email" name="email" placeholder="Email Address" >
 								</div>
 								<div class="row" id="field">
 									<div class="col-6" style="padding-right: 8px;">
@@ -80,7 +80,7 @@ $nationals = array('Afghan','Albanian','Algerian','American','Andorran','Angolan
 						<div class="row" id="register-field-container">
 							<div class="col">
 								<div class="row" id="field">
-									<input type="date" name="date_of_birth" placeholder="Date of Birth" >
+									<input type="date" name="date_of_birth" placeholder="Date of Birth" max="{{ \Carbon\Carbon::now()->subYears(18)->format('Y-m-d') }}">
 								</div>
 								<div class="row" id="field">
 									<input type="text" name="place_of_birth" placeholder="Place of Birth" >
@@ -367,14 +367,14 @@ $nationals = array('Afghan','Albanian','Algerian','American','Andorran','Angolan
 													<div class="col">
 														<label class="control control-radio">
 															<span style="color: gray;">Yes</span>
-															<input type="radio" name="is_head" value='1' />
+															<input type="radio" name="is_head" value='1' id="yesRadio"/>
 															<div class="control_indicator"></div>
 														</label>
 													</div>
 													<div class="col">
 														<label class="control control-radio">
 															<span style="color: gray;">No</span>
-															<input type="radio"  name="is_head" value='0' checked="checked" />
+															<input type="radio"  name="is_head" value='0' checked="checked" id="noRadio" />
 															<div class="control_indicator"></div>
 														</label>
 													</div>
@@ -474,24 +474,24 @@ $nationals = array('Afghan','Albanian','Algerian','American','Andorran','Angolan
 							<div class="col">
 								<div class="row" id="field">
 									<div class="col-6" style="padding-right: 8px;">
-										<input type="text" name="years_makati" placeholder="Years in Makati"> 
+										<input type="number" name="years_makati" placeholder="Years in Makati"> 
 										<!-- onfocus="(this.type='date')" onblur="(this.type='text')" -->
 									</div>
 									<div class="col-6" style="padding-left: 8px;">
-										<input type="text" name="years_cembo" placeholder="Years in Cembo">
+										<input type="number" name="years_cembo" placeholder="Years in Cembo">
 									</div>
+									</div>
+									<div class="row" id="field">
+										<input type="number" name="years_current" placeholder="Years in current Address">
+									</div>
+								<div class="row" id="field">
+									<input type="number" name="num_household" id="numHousehold" placeholder="Number of Household Members">
 								</div>
 								<div class="row" id="field">
-									<input type="number" name="years_current" placeholder="Years in current Address">
+									<input type="number" name="num_fam_household" id="numFamHousehold" placeholder="Number of Families in the Household">
 								</div>
 								<div class="row" id="field">
-									<input type="number" name="num_household" placeholder="Number of Household Members">
-								</div>
-								<div class="row" id="field">
-									<input type="number" name="num_fam_household" placeholder="Number of Families in the Household">
-								</div>
-								<div class="row" id="field">
-									<input type="number" name="num_fam_members" placeholder="Number of Family Members in Household">
+									<input type="number" name="num_fam_members" id="numFamMembers" placeholder="Number of Family Members in Household">
 								</div>
 							</div>
 						</div>
@@ -576,6 +576,58 @@ $nationals = array('Afghan','Albanian','Algerian','American','Andorran','Angolan
 	<script src="{{ asset('storage/js/Login.js') }}"></script>
 	<script src="{{ asset('storage/node_modules/@popperjs/core/dist/umd/popper.min.js') }}"></script>
 	<script src="{{ asset('storage/node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+    $(document).ready(function() {
+		hideFields();
+   
+        // Toggle field visibility when radio buttons change
+        $('input[name="is_head"]').change(function() {
+            if ($('#yesRadio').is(':checked')) {
+                showFields();
+            } else {
+				hideFields();
+            }
+        });
+
+        function hideFields() {
+            $('#numHousehold').hide();
+            $('#numFamHousehold').hide();
+            $('#numFamMembers').hide();
+        }
+
+        function showFields() {
+            $('#numHousehold').show();
+            $('#numFamHousehold').show();
+            $('#numFamMembers').show();
+        }
+    });
+	</script>
+
+	<script>
+	$(document).ready(function() {
+		// Select all input elements of type text
+		$('input[type="text"]').on('input', function() {
+		var inputValue = $(this).val();
+
+		// Split the input value into an array of words
+		var words = inputValue.split(' ');
+
+		// Capitalize the first letter of each word
+		var capitalizedWords = words.map(function(word) {
+			return word.charAt(0).toUpperCase() + word.slice(1);
+		});
+
+		// Join the capitalized words back into a single string
+		var capitalizedValue = capitalizedWords.join(' ');
+
+		// Update the input value with the capitalized version
+		$(this).val(capitalizedValue);
+		});
+	});
+	</script>
+
 </body>
 
 </html>
+
