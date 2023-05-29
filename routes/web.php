@@ -115,6 +115,10 @@ Route::middleware([
     Route::put('/requestApproved/send/{id}', [NotifyEmailController::class, 'approve'])->name('requestApproved.send');
     Route::put('/requestDenied/send/{id}', [NotifyEmailController::class, 'denied'])->name('requestDenied.send');
 
+    // CONTENT MANAGER
+    Route::get('/contents', [AdminController::class, 'content'])->name('contents')->middleware('auth', $Official_Admin);
+
+
     // DONT REMOVE THIS LINE
     Route::middleware(['auth', $Official_Admin])->resource('admin', AdminController::class);
     // DONT REMOVE THIS LINE

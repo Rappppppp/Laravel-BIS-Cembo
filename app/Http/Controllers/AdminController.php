@@ -91,7 +91,6 @@ class AdminController extends Controller
         }
     }
 
-
     public function show($id)
     {
         $user = User::find($id);
@@ -187,6 +186,12 @@ class AdminController extends Controller
             return redirect()->route('admin.officials')->with('error', 'Error Deleting Barangay Official: ' . $e->getMessage());
         }
     }
+
+    public function content()
+    {
+        return view('admin.contents');
+    }
+
 
     public function charts()
     {
