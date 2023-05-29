@@ -62,6 +62,7 @@ Route::middleware([
     });
 
     $Official_Admin = 'role:Barangay Official,Admin';
+    $ContentManager_Admin = 'role:Content Manager,Admin';
     $Admin = 'role:Admin';
 
     // Admin / Brgy Official - User Tables
@@ -116,7 +117,7 @@ Route::middleware([
     Route::put('/requestDenied/send/{id}', [NotifyEmailController::class, 'denied'])->name('requestDenied.send');
 
     // CONTENT MANAGER
-    Route::get('/contents', [AdminController::class, 'content'])->name('contents')->middleware('auth', $Official_Admin);
+    Route::get('/contents/complaint', [AdminController::class, 'complaint'])->name('contents.complaint')->middleware('auth', $ContentManager_Admin);
 
 
     // DONT REMOVE THIS LINE

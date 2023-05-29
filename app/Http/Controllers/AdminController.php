@@ -192,6 +192,19 @@ class AdminController extends Controller
         return view('admin.contents');
     }
 
+    public function complaint()
+    {
+        $mailData = ([
+            'name' => '[Name]',
+            'complaint' => '[Complaint]',
+            'approvedDate' => '2000-01-01 00:00:00',
+            'approvedBy' => '[Approved By]'
+
+        ]);
+
+        return view('emails.complaintApproved', compact('mailData'));
+    }
+
 
     public function charts()
     {
