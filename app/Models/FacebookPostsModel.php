@@ -13,9 +13,12 @@ class FacebookPostsModel extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'facebook_id',
+        'title',
         'message',
         'full_picture',
         'created_time',
-        'permalink_url'
+        'permalink_url',
+        'tags',
+        'posted_by'
     ];
 }

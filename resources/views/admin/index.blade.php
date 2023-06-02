@@ -221,8 +221,7 @@
 </html>
 
 <script src="{{ asset('storage/javascripts/admin_homepage.js') }}"></script>
-<!--* BOOTSTRAP JS-->
-<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+<!--* JQUERY - BOOTSTRAP JS-->
 <script src="{{ asset('storage/javascripts/jquery.js') }}"></script>
 <script src="{{ asset('storage/javascripts/bootstrap.min.js') }}"></script>
 <script src="{{ asset('storage/popper.js') }}"></script>

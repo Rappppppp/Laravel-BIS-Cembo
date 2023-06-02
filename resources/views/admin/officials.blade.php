@@ -53,7 +53,7 @@
                             {{ session('error') }}
                         </div>
                     @endif
-                    <div class="parallax-bg-img" style="background-image: url('{{ asset('storage/images/Rectangle 109.png') }}'); padding-bottom: 5%;">
+                    <div class="parallax-bg-img" style="background-image: url('{{ asset('storage/images/Rectangle 109.png') }}'); padding-bottom: 5%; height: 100vh;">
                         <div class="container-fluid pb-0" id="officials">
                             <div class="text-white">
                                 <!-- START: This form should be hidden -->

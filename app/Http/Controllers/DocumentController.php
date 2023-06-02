@@ -28,28 +28,29 @@ class DocumentController extends Controller
     {
         // Validate the input fields
         $validated = $request->validate([
-            'contact_person' => 'required',
-            'relationship' => 'required',
-            'stnum' => 'required',
-            'stadd' => 'required',
-            'brgy' => 'required',
-            'city' => 'required',
-            'province' => 'required',
-            'contact_number' => 'required',
+            'cp_firstname' => 'required',
+            'cp_middlename' => 'required',
+            'cp_lastname' => 'required',
+            'cp_contact' => 'required',
+            'cp_relationship' => 'required',
+            'cp_housenum' => 'required',
+            'cp_street' => 'required',
+            'cp_brgy' => 'required',
+            'cp_city' => 'required',
             'photo' => 'required|file|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         // Determine the document type
-        $documentType = ($request->input('form') == 'brgyid') ? 'Barangay ID' : 'Barangay Certificate';
+        $document_type = ($request->input('form') == 'brgyid') ? 'Barangay ID' : 'Barangay Certificate';
 
         // Check for duplicates
-        $existingRequest = DocumentModel::where('user_id', Auth::user()->id)
-            ->where('document_type', $documentType)
+        $existing_request = DocumentModel::where('user_id', Auth::user()->id)
+            ->where('document_type', $document_type)
             ->where('status', '<>', 'cancelled')
             ->first();
 
-        if ($existingRequest) {
-            return back()->with('error', 'You already have a pending or approved request for this document.');
+        if ($existing_request) {
+            return redirect('/documents/brgyid')->with('info', 'You already have a pending or approved request for this document.');
         }
 
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
@@ -57,30 +58,37 @@ class DocumentController extends Controller
             // Store the file in the app/storage/documents directory
             $path = $request->file('photo')->store('public/image_id');
 
+            $contact_person_name = $validated['cp_firstname'] . " " . $validated['cp_middlename'] . " " . $validated['cp_lastname'];
+            $mother_name = $request['m-firstname'] . " " . $request['m-middlename'] . " " . $request['m-lastname'];
+            $father_name = $request['f-firstname'] . " " . $request['f-middlename'] . " " . $request['f-lastname'];
+
             // Create the new document request
             $documentRequest = DocumentModel::create([
                 'user_id' => Auth::user()->id,
-                'document_type' => $documentType,
+                'document_type' => $document_type,
                 'document_path' => $path,
                 'status' => 'pending',
                 'inputs' => array(
-                    'contact_person' => $validated['contact_person'],
-                    'relationship' => $validated['relationship'],
-                    'stnum' => $validated['stnum'],
-                    'stadd' => $validated['stadd'],
-                    'brgy' => $validated['brgy'],
-                    'city' => $validated['city'],
-                    'province' => $validated['province'],
-                    'contact_number' => $validated['contact_number']
+                    'contact_person' => $contact_person_name,
+                    'relationship' => $validated['cp_relationship'],
+                    'cp_housenum' => $validated['cp_housenum'],
+                    'cp_street' => $validated['cp_street'],
+                    'cp_brgy' => $validated['cp_brgy'],
+                    'cp_city' => $validated['cp_city'],
+                    'contact_number' => $validated['cp_contact'],
+                    'mother_name' => $mother_name,
+                    'mother_contact' => $request['m-contact'],
+                    'father_name' => $father_name,
+                    'father_contact' => $request['f-contact'],
                 )
             ]);
 
             $documentRequest->save();
 
             // Process form submission
-            return redirect()->route('documents')->with('success', 'Your document request has been submitted successfully.');
+            return redirect('/documents/brgyid')->with('success', 'Your document request has been submitted successfully.');
         } else {
-            return back()->with('error', 'Document upload failed. Please upload a valid file.');
+            return redirect('/documents/brgyid')->with('error', 'Document upload failed. Please upload a valid file.');
         }
 
     }

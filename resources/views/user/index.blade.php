@@ -25,7 +25,7 @@
                             <div class="row">
                                 <div class="col" style="padding: 30px;">
                                     <span>
-                                    Posted by: 
+                                    Posted by: {{ $post['posted_by'] }}
                                     </span>
                                 </div>
                                 <div class="col" style="padding: 30px; text-align: right;">
@@ -57,18 +57,28 @@
                                 <hr style="height: 5px; background-color: white;">
                             </div>
                             <div class="row" style="padding: 20px;">
-                                <span style="font-size: 28px; color: #FCC422;">Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit.</span>
+                                <span style="font-size: 28px; color: #FCC422;">{{ $post['title'] }}</span>
                             </div>
                             <div class="row" style="padding: 20px; padding-top: 0;">
                                 <span>{{ $post['message'] }}</span>
                                 <a href="{{ $post['permalink_url'] }}" target="_blank" style="color: #FCC422; text-decoration: none;">More Info...</a>
                             </div>
                             <div class="row">
-                                <img src="{{ $post['full_picture'] }}" class="img-fluid" id="image-content">
+                                @php
+                                    $extension = pathinfo($post['full_picture'], PATHINFO_EXTENSION);
+                                @endphp
+
+                                @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
+                                    <img src="{{ $post['full_picture'] }}">
+                                @elseif ($extension === 'mp4')
+                                    <video src="{{ $post['full_picture'] }}" controls></video>
+                                @else
+                                    <p>Unsupported file type</p>
+                                @endif
                             </div>
+
                             <div class="row" style="padding: 20px;">
-                                <span>Tags: Lorem, Ipsum, Dolor, Sit, Amet.</span>
+                                <span>Tags: {{ $post['tags'] }}</span>
                             </div>
                         </div>
                         @endforeach

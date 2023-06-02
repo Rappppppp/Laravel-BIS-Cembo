@@ -10,10 +10,13 @@ return new class extends Migration {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->text('facebook_id');
+            $table->string('title');
             $table->text('message')->nullable();
             $table->text('full_picture');
             $table->text('created_time');
             $table->text('permalink_url');
+            $table->text('tags');
+            $table->text('posted_by');
             $table->timestamps();
         });
     }

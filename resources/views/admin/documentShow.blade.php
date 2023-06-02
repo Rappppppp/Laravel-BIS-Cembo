@@ -69,6 +69,8 @@
                                         <h3>Emergency Contact Details</h3>
                                         <thead>
                                             <tr>
+                                                <th>Mother's Name</th>
+                                                <th>Father's Name</th>
                                                 <th>Contact Person</th>
                                                 <th>Relationship</th>
                                                 <th>Contact Number</th>
@@ -78,10 +80,12 @@
                                         <tbody>
 
                                             <tr>
+                                                <td>{{ $request->inputs['mother_name'] }} : {{ $request->inputs['mother_contact'] }}</td>
+                                                <td>{{ $request->inputs['father_name'] }} : {{ $request->inputs['father_contact'] }}</td>
                                                 <td>{{ $request->inputs['contact_person'] }}</td>
                                                 <td>{{ $request->inputs['relationship'] }}</td>
                                                 <td>{{ $request->inputs['contact_number'] }}</td>
-                                                <td>{{ $request->inputs['stnum'] }} {{ $request->inputs['stadd'] }} {{ $request->inputs['brgy'] }}, {{ $request->inputs['city'] }}, {{ $request->inputs['province'] }}</td>
+                                                <td>{{ $request->inputs['cp_housenum'] }} {{ $request->inputs['cp_street'] }} {{ $request->inputs['cp_brgy'] }}, {{ $request->inputs['cp_city'] }}</td>
                                             </tr>
                                
                                         </tbody>
