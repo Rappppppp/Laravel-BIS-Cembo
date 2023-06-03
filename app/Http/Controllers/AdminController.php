@@ -119,12 +119,19 @@ class AdminController extends Controller
         return view('admin.documentRequests', compact('requests'));
     }
 
-    public function documentShow($id)
+    public function documentShow($document_type, $document_id, $barangay_id)
     {
-        $document = DocumentModel::join('users', 'users.id', '=', 'document_requests.user_id')
-            ->select('document_requests.*', 'users.name')
-            ->find($id);
-        return view('admin.documentShow')->with('request', $document);
+        if ($document_type == 'Barangay-ID') {
+            $user = User::where('barangay_id', $barangay_id)->first();
+            $user_id = $user->id;
+            $information = PersonalInformationModel::where('user_id', $user_id)->first();
+            $makatizen = MakatizenRegistryModel::where('user_id', $user_id)->first();
+            $contact = ContactInformationModel::where('user_id', $user_id)->first();
+            $document = DocumentModel::join('users', 'users.id', '=', 'document_requests.user_id')
+                ->select('document_requests.*', 'users.name')
+                ->find($document_id, $barangay_id);
+            return view('admin.document_barangay_id', compact('user', 'information', 'contact', 'makatizen', 'document'));
+        }
     }
 
     public function complaintShow($id)

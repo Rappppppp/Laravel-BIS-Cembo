@@ -27,7 +27,7 @@ class NotifyComplaintRejected extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Notify Complaint Rejected',
+            subject: 'Complaint Rejected',
         );
     }
 

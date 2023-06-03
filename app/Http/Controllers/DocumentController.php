@@ -17,7 +17,7 @@ class DocumentController extends Controller
 
     public function showForm($form)
     {
-        if (!in_array($form, ['brgyid', 'brgycertificate'])) {
+        if (!in_array($form, ['Barangay-ID', 'Indigency'])) {
             abort(404);
         }
 

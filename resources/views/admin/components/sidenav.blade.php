@@ -7,6 +7,12 @@
             <ul class="navbar-nav ml-auto">
                 <p id="category-label">Category</p>
                 <li class="nav-item">
+                    <a class="nav-link" href="/"><i
+                            class="fa fa-solid fa-lg fa-home pr-2 sb-icon" id="q-icon"></i><span
+                            class="sb-label">Home</span><i class="fa fa-solid fa-chevron-right pl-4 sb-arrow"
+                            id="q-icon"></i></a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/admin"><i
                             class="fa fa-solid fa-lg fa-table pr-2 sb-icon" id="q-icon"></i><span
                             class="sb-label">Tables</span><i class="fa fa-solid fa-chevron-right pl-4 sb-arrow"

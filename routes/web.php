@@ -102,7 +102,7 @@ Route::middleware([
     Route::get('/admin/document-requests', [AdminController::class, 'documentRequests'])->name('admin.documentRequests')->middleware('auth', $Official_Admin);
     Route::put('/documents/update/{id}', [DocumentController::class, 'update'])->name('documents.update');
     Route::delete('/documents/{document}', [DocumentController::class, 'destroy'])->name('documents.delete');
-    Route::get('/admin/document-requests/{id}', [AdminController::class, 'documentShow'])->name('admin.documentShow')->middleware('auth', $Official_Admin);
+    Route::get('/admin/document-requests/{document_type}/{document_id}/{barangay_id}', [AdminController::class, 'documentShow'])->name('admin.documentShow')->middleware('auth', $Official_Admin);
 
     // Complaint Requests
     Route::get('/admin/complaint-requests', [AdminController::class, 'complaintRequests'])->name('admin.complaintRequests')->middleware('auth', $Official_Admin);

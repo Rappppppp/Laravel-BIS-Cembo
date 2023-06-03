@@ -48,7 +48,11 @@
                                                 <td>{{ $request->document_type }}</td>
                                                 <td><a href="{{ route('admin.show', $request->user->id) }}">{{ $request->barangay_id }}</a></td>
                                                 <td> 
-                                                    <a href="{{ route('admin.documentShow', ['id' => $request->id]) }}" class="text-blue-600 hover:text-blue-900 mb-2 mr-2" >View Details</a>
+                                                    <a href="{{ route('admin.documentShow', [
+                                                            'document_type' => str_replace(' ', '-', $request->document_type),
+                                                            'document_id' => $request->id, 
+                                                            'barangay_id' => $request->user->barangay_id
+                                                        ]) }}" class="text-blue-600 hover:text-blue-900 mb-2 mr-2" >View Details</a>
                                                 </td>
                                                 <td>{{ $request->status }}</td>
                                             </tr>

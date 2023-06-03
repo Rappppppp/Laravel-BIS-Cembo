@@ -27,7 +27,7 @@
                         <a class="nav-link" href="/services">Services</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="aboutus">About Us</a>
+                        <a class="nav-link" href="/aboutus">About Us</a>
                     </li>
                 </ul>
                 @auth 

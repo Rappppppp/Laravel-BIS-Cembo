@@ -27,7 +27,7 @@ class NotifyComplaintApproved extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Complaint Approved',
+            subject: 'Complaint Resolved',
         );
     }
 
@@ -39,7 +39,7 @@ class NotifyComplaintApproved extends Mailable
     public function content()
     {
         return new Content(
-            view: 'emails.complaintApproved',
+            view: 'emails.complaintResolved',
         );
     }
 
