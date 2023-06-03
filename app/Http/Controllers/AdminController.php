@@ -121,17 +121,21 @@ class AdminController extends Controller
 
     public function documentShow($document_type, $document_id, $barangay_id)
     {
+        $user = User::where('barangay_id', $barangay_id)->first();
+        $user_id = $user->id;
+        $information = PersonalInformationModel::where('user_id', $user_id)->first();
+        $makatizen = MakatizenRegistryModel::where('user_id', $user_id)->first();
+        $contact = ContactInformationModel::where('user_id', $user_id)->first();
+        $document = DocumentModel::join('users', 'users.id', '=', 'document_requests.user_id')
+            ->select('document_requests.*', 'users.name')
+            ->find($document_id, $barangay_id);
+
         if ($document_type == 'Barangay-ID') {
-            $user = User::where('barangay_id', $barangay_id)->first();
-            $user_id = $user->id;
-            $information = PersonalInformationModel::where('user_id', $user_id)->first();
-            $makatizen = MakatizenRegistryModel::where('user_id', $user_id)->first();
-            $contact = ContactInformationModel::where('user_id', $user_id)->first();
-            $document = DocumentModel::join('users', 'users.id', '=', 'document_requests.user_id')
-                ->select('document_requests.*', 'users.name')
-                ->find($document_id, $barangay_id);
             return view('admin.document_barangay_id', compact('user', 'information', 'contact', 'makatizen', 'document'));
+        } else if ($document_type == 'Indigency') {
+            return view('admin.document_indigency', compact('user', 'contact', 'document'));
         }
+
     }
 
     public function complaintShow($id)
@@ -165,7 +169,7 @@ class AdminController extends Controller
     public function addBarangayOfficials(Request $request)
     {
         if ($request['official_name'] == '')
-            return redirect()->route('admin.officials')->with('error', "Error Can't Barangay Official!");
+            return redirect()->route('admin.officials')->with('error', "Error! Please select a Barangay Official!");
 
         if ($request->hasFile('official_photo') && $request->file('official_photo')->isValid()) {
             $path = $request->file('official_photo')->store('public/official_photos');

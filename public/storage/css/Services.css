@@ -85,7 +85,7 @@ body {
 }
 
 .nav-item {
-    font-size: larger;
+    font-size: 16px;
     margin-left: 10px;
 }
 
@@ -111,11 +111,6 @@ body {
     box-shadow: 8px -6px 26px 3px rgba(0, 0, 0, 0.45);
 }
 
-#profile-pic {
-    width: 5%;
-    height: 5%;
-}
-
 #intro-container {
     padding-top: 10%;
     padding-bottom: 1%;
@@ -124,14 +119,26 @@ body {
     text-align: center;
     color: #FCC422;
     font-weight: bold;
-    font-size: 72px;
+}
+
+#intro {
+    color: #FCC422;
+    font-weight: bold;
+    font-size: 48px;
+    text-transform: uppercase;
+}
+
+#spacer {
+    height: 10px; 
+    background-color: #FCC422; 
+    opacity: 100%; 
+    margin: 0;
 }
 
 #skewed {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    background-attachment: fixed;
     width: 125%;
     height: 100%;
     clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
@@ -142,7 +149,7 @@ body {
     height: 100%;
     text-align: center;
     color: white;
-    font-size: 20px;
+    font-size: 16px;
     text-transform: uppercase;
     padding: 3%;
 }
@@ -153,6 +160,11 @@ body {
 
 #content-container-b {
     background-color: #04091DB3;
+}
+
+#title {
+    font-size: 20px; 
+    font-weight: bold;
 }
 
 #image-for-small {
@@ -192,33 +204,25 @@ body {
 /* Responsive */
 @media (min-width: 320px) {
 
-    #intro-container {
-        font-size: 50px;
-    }
-
     #content-container {
         padding-bottom: 10%;
     }
 
-    #post-container {
-        margin-top: 5%;
-        width: 100%;
+    #description-container-a {
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 
 @media (min-width: 768px) {
 
-    #intro-container {
-        font-size: 72px;
-    }
-
     #content-container {
         padding-bottom: 2%;
     }
 
-    #post-container {
-        margin-top: 2%;
-        width: 75%;
+    #description-container-a {
+        padding-left: 30px;
+        padding-right: 30px;
     }
 }
 

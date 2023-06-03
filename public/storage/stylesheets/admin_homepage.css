@@ -107,7 +107,7 @@ body {
 
 /* End */
 /* Responsive */
-@media (min-width: 360px) {
+@media (min-width: 320px) {
     #sidebar-content-container {
         text-align: center;
     }

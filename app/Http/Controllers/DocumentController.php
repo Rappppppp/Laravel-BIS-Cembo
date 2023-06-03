@@ -26,22 +26,9 @@ class DocumentController extends Controller
 
     public function submit(Request $request)
     {
-        // Validate the input fields
-        $validated = $request->validate([
-            'cp_firstname' => 'required',
-            'cp_middlename' => 'required',
-            'cp_lastname' => 'required',
-            'cp_contact' => 'required',
-            'cp_relationship' => 'required',
-            'cp_housenum' => 'required',
-            'cp_street' => 'required',
-            'cp_brgy' => 'required',
-            'cp_city' => 'required',
-            'photo' => 'required|file|mimes:jpg,jpeg,png|max:2048',
-        ]);
 
         // Determine the document type
-        $document_type = ($request->input('form') == 'brgyid') ? 'Barangay ID' : 'Barangay Certificate';
+        $document_type = $request->input('form');
 
         // Check for duplicates
         $existing_request = DocumentModel::where('user_id', Auth::user()->id)
@@ -49,48 +36,89 @@ class DocumentController extends Controller
             ->where('status', '<>', 'cancelled')
             ->first();
 
-        if ($existing_request) {
-            return redirect('/documents/brgyid')->with('info', 'You already have a pending or approved request for this document.');
-        }
-
-        if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
-
-            // Store the file in the app/storage/documents directory
-            $path = $request->file('photo')->store('public/image_id');
-
-            $contact_person_name = $validated['cp_firstname'] . " " . $validated['cp_middlename'] . " " . $validated['cp_lastname'];
-            $mother_name = $request['m-firstname'] . " " . $request['m-middlename'] . " " . $request['m-lastname'];
-            $father_name = $request['f-firstname'] . " " . $request['f-middlename'] . " " . $request['f-lastname'];
-
-            // Create the new document request
-            $documentRequest = DocumentModel::create([
-                'user_id' => Auth::user()->id,
-                'document_type' => $document_type,
-                'document_path' => $path,
-                'status' => 'pending',
-                'inputs' => array(
-                    'contact_person' => $contact_person_name,
-                    'relationship' => $validated['cp_relationship'],
-                    'cp_housenum' => $validated['cp_housenum'],
-                    'cp_street' => $validated['cp_street'],
-                    'cp_brgy' => $validated['cp_brgy'],
-                    'cp_city' => $validated['cp_city'],
-                    'contact_number' => $validated['cp_contact'],
-                    'mother_name' => $mother_name,
-                    'mother_contact' => $request['m-contact'],
-                    'father_name' => $father_name,
-                    'father_contact' => $request['f-contact'],
-                )
+        if ($document_type == 'Barangay-ID') {
+            // Validate the input fields
+            $validated = $request->validate([
+                'cp_firstname' => 'required',
+                'cp_middlename' => 'required',
+                'cp_lastname' => 'required',
+                'cp_contact' => 'required',
+                'cp_relationship' => 'required',
+                'cp_housenum' => 'required',
+                'cp_street' => 'required',
+                'cp_brgy' => 'required',
+                'cp_city' => 'required',
+                'photo' => 'required|file|mimes:jpg,jpeg,png|max:2048',
             ]);
 
-            $documentRequest->save();
+            if ($existing_request) {
+                return redirect('/documents/Barangay-ID')->with('info', 'You already have a pending or approved request for this document.');
+            }
 
-            // Process form submission
-            return redirect('/documents/brgyid')->with('success', 'Your document request has been submitted successfully.');
-        } else {
-            return redirect('/documents/brgyid')->with('error', 'Document upload failed. Please upload a valid file.');
+            if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
+
+                // Store the file in the app/storage/documents directory
+                $path = $request->file('photo')->store('public/image_id');
+
+                $contact_person_name = $validated['cp_firstname'] . " " . $validated['cp_middlename'] . " " . $validated['cp_lastname'];
+                $mother_name = $request['m-firstname'] . " " . $request['m-middlename'] . " " . $request['m-lastname'];
+                $father_name = $request['f-firstname'] . " " . $request['f-middlename'] . " " . $request['f-lastname'];
+
+                // Create the new document request
+                $documentRequest = DocumentModel::create([
+                    'user_id' => Auth::user()->id,
+                    'document_type' => $document_type,
+                    'document_path' => $path,
+                    'status' => 'pending',
+                    'inputs' => array(
+                        'contact_person' => $contact_person_name,
+                        'relationship' => $validated['cp_relationship'],
+                        'cp_housenum' => $validated['cp_housenum'],
+                        'cp_street' => $validated['cp_street'],
+                        'cp_brgy' => $validated['cp_brgy'],
+                        'cp_city' => $validated['cp_city'],
+                        'contact_number' => $validated['cp_contact'],
+                        'mother_name' => $mother_name,
+                        'mother_contact' => $request['m-contact'],
+                        'father_name' => $father_name,
+                        'father_contact' => $request['f-contact'],
+                    )
+                ]);
+
+                $documentRequest->save();
+
+                // Process form submission
+                return redirect('/documents/Barangay-ID')->with('success', 'Your document request has been submitted successfully.');
+            } else {
+                return redirect('/documents/Barangay-ID')->with('error', 'Document upload failed. Please upload a valid file.');
+            }
+
+        } else if ($document_type == 'Indigency') {
+            if ($existing_request) {
+                return redirect('/documents/Indigency')->with('info', 'You already have a pending or approved request for this document.');
+            }
+
+            if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
+                // Store the file in the app/storage/documents directory
+                $path = $request->file('photo')->store('public/image_id');
+
+                // Create the new document request
+                $documentRequest = DocumentModel::create([
+                    'user_id' => Auth::user()->id,
+                    'document_type' => $document_type,
+                    'document_path' => $path,
+                    'status' => 'pending',
+                    'inputs' => array(
+                        'requirement' => $request['requirement'],
+                    )
+                ]);
+
+                // Process form submission
+                return redirect('/documents/Indigency')->with('success', 'Your document request has been submitted successfully.');
+            } else {
+                return redirect('/documents/Indigency')->with('error', 'Document upload failed. Please upload a valid file.');
+            }
         }
-
     }
 
     public function update(Request $request, $id)

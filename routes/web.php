@@ -8,6 +8,7 @@ use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\NotifyEmailController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\AppContentController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -46,9 +47,7 @@ Route::middleware([
             return view('user.services.maintenance');
         });
 
-        Route::get('/aboutus', function () {
-            return view('user.aboutus');
-        });
+        Route::get('/aboutus', [AppContentController::class, 'display']);
 
         // Request Documents - User
         Route::get('/documents', [DocumentController::class, 'index'])->name('documents');
@@ -85,13 +84,23 @@ Route::middleware([
     // Add/Edit/Delete Barangay Officials - Admin only
     Route::get('/admin/officials', [AdminController::class, 'barangayOfficials'])
         ->name('admin.officials')
-        ->middleware('auth', $Admin);
+        ->middleware('auth', $ContentManager_Admin);
     Route::post('/admin/officials/add', [AdminController::class, 'addBarangayOfficials'])
         ->name('admin.officials.add')
-        ->middleware('auth', $Admin); // Will switch back to admin
+        ->middleware('auth', $ContentManager_Admin); // Will switch back to admin
     Route::delete('/admin/officials/remove/{id}', [AdminController::class, 'removeBarangayOfficial'])
         ->name('admin.officials.remove')
-        ->middleware('auth', $Admin);
+        ->middleware('auth', $ContentManager_Admin);
+
+    Route::get('/edit-officials', [AdminController::class, 'barangayOfficials'])
+        ->name('edit.officials')
+        ->middleware('auth', $ContentManager_Admin);
+    Route::post('/edit-officials/add', [AdminController::class, 'addBarangayOfficials'])
+        ->name('edit.officials.add')
+        ->middleware('auth', $ContentManager_Admin); // Will switch back to admin
+    Route::delete('/edit-officials/remove/{id}', [AdminController::class, 'removeBarangayOfficial'])
+        ->name('edit.officials.remove')
+        ->middleware('auth', $ContentManager_Admin);
 
     // Facebook Posts
     Route::get('/admin/posts', [FacebookController::class, 'index'])->name('admin.posts')->middleware('auth', $Official_Admin);

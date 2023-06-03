@@ -82,7 +82,7 @@
 <body>
     <div class="wrapper"> <!-- Fixes Footer to Bottom -->
         <!-- Nav -->
-        @include('user.parts.nav')
+        @include('documents.header')
         <!-- Content -->
         <main>
             <div id="content">
@@ -132,10 +132,18 @@
                                   <hr id="spacer-2">
                               </div>
                               <div class="row" style="height: fit-content; padding: 10px;">
-                                  <div class="col-lg-3 col-md-3 col-sm-12 my-2">
-                                      <input type="text" name="requirement" placeholder="Requirement" required>
+                                  <div class="col-lg-6 col-md-6 col-sm-12 my-2">
+                                  <div class="container-fluid" id="input">
+                                        <div class="select" onchange="change(event.target.value)">
+                                            <select name="requirement" id="type">
+                                                <option value="DSWD Batasan">DSWD Batasan</option>
+                                                
+                                            </select>
+                                            <div class="select_arrow">
+                                            </div>
+                                        </div>
+                                    </div>
                                   </div>
-                                  
                               </div>
 
                               <div style="height: fit-content; padding: 10px;">
@@ -279,9 +287,7 @@
                 
                 fileCheckmark.css('display', 'none');
                 return alertError.css('display', 'inline-block');
-                  
           });
-
         });
     </script>
 </body>

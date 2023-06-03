@@ -12,7 +12,7 @@
 <body>
     <div class="wrapper"> <!-- Fixes Footer to Bottom -->
         <!-- Nav -->
-        @include('user.parts.nav')
+        @include('documents.header')
         <!-- Content -->
         <main>
             <div id="content">

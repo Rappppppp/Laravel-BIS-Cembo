@@ -1,8 +1,10 @@
 <!doctype html> 
 <head>
     @include('admin.components.head')
-    <script src="https://unpkg.com/pdf-lib@1.11.0"></script>
-    <script src="https://unpkg.com/downloadjs@1.4.7"></script>
+    <!-- <script src="https://unpkg.com/pdf-lib"></script>
+    <script src="https://unpkg.com/downloadjs@1.4.7"></script> -->
+    <script src="{{ asset('storage/pdf-lib/lib.js') }}"></script>
+    <script src="{{ asset('storage/pdf-lib/dl-lib.js') }}"></script>
 </head>
 <body>
     <div class="wrapper">    
@@ -136,11 +138,6 @@
         // Get the form containing all the fields
         const form = pdfDoc.getForm()
 
-        // // Get all fields in the PDF by their names
-        // const nameField = form.getTextField('CharacterName 2')
-        // // Fill in the basic info fields
-        // nameField.setText('Mario')
-
         const dateString = "{{ $document->requested_at }}";
         const dateObj = new Date(dateString);
 
@@ -157,6 +154,9 @@
         const firstname = form.getTextField('First Name')
         const middlename = form.getTextField('Middle Name')
         const contact = form.getTextField('Contact Number')
+        const dob = form.getTextField('Date of Birth')
+        const gender = form.getTextField('Gender')
+        const status = form.getTextField('Civil Status')
         const address_cembo = form.getTextField('Address Cembo')
         const address_provincial = form.getTextField('Address Provincial')
         const years_cembo = form.getTextField('Length Stay Years')
@@ -172,6 +172,9 @@
         firstname.setText('{{ $information->first_name }}')
         middlename.setText('{{ $information->middle_name }}')
         contact.setText('{{ $contact->contact_number }}')
+        dob.setText('{{ $information->date_of_birth }}')
+        gender.setText('{{ $information->gender }}')
+        status.setText('{{ $information->civil_status }}')
         address_cembo.setText('{{ $contact->house_number }} {{ $contact->street_name }} {{ $contact->barangay_name }}, {{ $contact->city_name }}')
         address_provincial.setText('{{ $contact->prov_house_number }} {{ $contact->prov_street_name }} {{ $contact->prov_barangay_name }}, {{ $contact->prov_city_name }}, {{ $contact->province_name }}')
         years_cembo.setText('{{ $makatizen->years_barangay_cembo }}')

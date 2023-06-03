@@ -18,7 +18,82 @@
 <body>
     <div class="wrapper"> <!-- Fixes Footer to Bottom -->
         <!-- Nav -->
-        @include('user.parts.nav')
+        <header>
+            <div class="container-fluid" id="nav">
+                <div class="navbar-toggler d-sm-block d-lg-none d-md-none" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapsibleNavbar" id="logo-container">
+                    <img src="{{ asset('storage/res/img/logo/logo.png') }}" class="img-fluid rounded-circle" id="logo">
+                </div>
+
+                <div class="container-fluid d-lg-block d-md-block d-sm-none d-none" id="logo-container">
+                    <img src="{{ asset('storage/res/img/logo/logo.png') }}" class="img-fluid rounded-circle" id="logo">
+                </div>
+
+                <nav class="navbar navbar-expand-md">
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/">Home</a>
+                            </li>
+                            @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="/complaints">Report</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/documents">Request</a>
+                            </li>
+                            @endauth
+                            <li class="nav-item">
+                                <a class="nav-link" href="/services">Services</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="/aboutus" id="nav-active-link">About Us</a>
+                            </li>
+                        </ul>
+                        @auth 
+                        <ul class="navbar-nav" style="margin-left: auto; margin-right: 5%;">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    
+                                    {{ Auth::user()->personalInformation->first_name }} {{ Auth::user()->personalInformation->last_name }}
+                            
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            
+                                    @if(Auth::user()->role == 'Admin')
+                                        <a class="dropdown-item" href="/admin">Admin</a>
+                                    @elseif(Auth::user()->role == 'Content Manager')
+                                        <a class="dropdown-item" href="/edit-officials">Manage Content</a>
+                                    @endif 
+                            
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item p-0" href="#"> 
+                                    @if(Auth::check())
+                                        <form action="{{ url('logout') }}" method="POST">
+                                            {{ csrf_field() }}
+                                            <button type="submit" class="dropdown-item">Log Out
+                                            </button>
+                                        </form>
+                                    @endif</a>
+                                </div>
+                            </li>
+                        </ul>
+                        @endauth
+                        @guest
+                        <ul class="navbar-nav" style="margin-left: auto; margin-right: 5%;">
+                            <li>   
+                                <a class="nav-link" href="/register" id="navbarDropdown" role="button">Register</a>     
+                            </li>
+                            <li class="navbar-nav" style=" margin-right: 5%;">  
+                                <a class="nav-link" href="/login" id="navbarDropdown" role="button">Login</a>  
+                            </li>
+                        </ul>
+                        @endguest
+                    </div>
+                </nav>
+            </div>
+        </header>
         <!-- Content -->
         <main>
             <div id="content">
@@ -43,15 +118,7 @@
                             <hr>
                         </div>
                         <div class="container-fluid introduction-container" id="description-container-b">
-                            <p>Barangay Cembo is situated along the Pasig River and belongs to the Second District of
-                                Makati City. It is under the North East Cluster or Cluster 6 with Guadalupe Viejo, West
-                                Rembo and Northside. Based on the 2015 Census of Population conducted by the Philippine
-                                Statistics Authority (PSA), Cembo has 26,213 total population and a percentage share of
-                                4.50%. By population density, on the other hand, considering its land area and
-                                population count, the barangay has 61 persons per 1,000 square meters.This barangay has
-                                a total land area of 426,700 square meters and it is predominantly residential. Cembo
-                                BLISS and the New Building of Makati Science High School are located within Barangay
-                                Cembo. </p>
+                            {!! $introduction !!}
                         </div>
                     </div>
                     @if(auth()->user()->role == 'Content Manager' || 'Admin')
@@ -64,13 +131,7 @@
                             <hr>
                         </div>
                         <div class="container-fluid history-container-1" id="description-container-b">
-                            <p>Cembo, a popular acronym for Central Enlisted Men’s Barrio, has its beginning in 1949,
-                                when the first batch of enlisted servicemen from the Infantry Group, Philippine Ground
-                                Force, Florida Blanca, Pampanga arrived at the Fort William McKinley (now Fort
-                                Bonifacio). They were directed to settle at big rolling open tract of land adjacent to
-                                the North Gate (Gate I) which was mostly covered by a dense growth of cogon grass. The
-                                place was selected to be the site for the housing area of the enlisted personnel of the
-                                Philippine Ground Force.</p>
+                            {!! $history !!}
                         </div>
                     </div>
                     <div class="container-fluid" id="content-container-a">
@@ -82,12 +143,7 @@
                             <br>
                         </div>
                         <div class="container-fluid history-container-2" id="description-container-b">
-                            <p>As the bulk of the whole command came later, the housing area became congested. M/Sgt.
-                                Teofilo Bautista, the barrio Lieutenant and Assistant Reservation Officer, was directed
-                                by the higher headquarter offices to lead a survey team for the location of the
-                                unoccupied space in the vast sprawling reservation thus West Rembo was created.
-                                Subsequently, the other barrios were created like the East Rembo, Comembo, and Pembo to
-                                accommodate the increasing population of the military personnel.</p>
+                            {!! $history_cont !!}
                         </div>
                     </div>
                     @else
@@ -99,21 +155,10 @@
                             <hr>
                         </div>
                         <div class="container-fluid history-container-1" id="description-container-b">
-                            <p>Cembo, a popular acronym for Central Enlisted Men’s Barrio, has its beginning in 1949,
-                                when the first batch of enlisted servicemen from the Infantry Group, Philippine Ground
-                                Force, Florida Blanca, Pampanga arrived at the Fort William McKinley (now Fort
-                                Bonifacio). They were directed to settle at big rolling open tract of land adjacent to
-                                the North Gate (Gate I) which was mostly covered by a dense growth of cogon grass. The
-                                place was selected to be the site for the housing area of the enlisted personnel of the
-                                Philippine Ground Force.</p>
+                            {!! $history !!}
                         </div>
                         <div class="container-fluid history-container-2" id="description-container-b">
-                            <p>As the bulk of the whole command came later, the housing area became congested. M/Sgt.
-                                Teofilo Bautista, the barrio Lieutenant and Assistant Reservation Officer, was directed
-                                by the higher headquarter offices to lead a survey team for the location of the
-                                unoccupied space in the vast sprawling reservation thus West Rembo was created.
-                                Subsequently, the other barrios were created like the East Rembo, Comembo, and Pembo to
-                                accommodate the increasing population of the military personnel.</p>
+                            {!! $history_cont !!}
                         </div>
                     </div>
                     @endif
@@ -133,10 +178,7 @@
                             <hr>
                         </div>
                         <div class="container-fluid mission-container" id="description-container-b">
-                            <p>Barangay Cembo to be a safe and secured place to live in for its constituents and
-                                other stakeholders will advocate and provide continuous information dissemination and
-                                intensified actions and programs on the social, economic, infrastructure, environmental
-                                management and institutional sectors.</p>
+                            {!! $mission !!}
                         </div>
                     </div>
                     <div class="container-fluid" id="content-container-a">
@@ -150,10 +192,7 @@
                             <hr>
                         </div>
                         <div class="container-fluid vision-container" id="description-container-b">
-                            <p>Barangay Cembo to be livable and disaster resilient community with safe and secured
-                                environment for its God-loving, productive and responsible citizens who will enjoy easy
-                                access to employment opportunities and basic services through the efficient and
-                                excellent public service of its leaders.</p>
+                            {!! $vision !!}
                         </div>
                     </div>
                     <hr id="spacer">

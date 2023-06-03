@@ -43,34 +43,32 @@
                    
               
                     <div class="parallax-bg-img">
-                        <div class="card">
-                                <div class="col col-sm-12">
-                                    <div class="jumbotron bg-white vertical-center">
-                                        <div class="row row-header">
-                                            <div class="col-lg-4 col-md-12 col-sm-12 pt-sm-2 residents_card">
-                                                <div class="card card-residents p-3">
-                                                Residents
-                                                <i class="fa fa-residents fa-user" aria-hidden="true"><span class="fa-residents-span">{{ $userCount }}</span></i>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-4 col-md-12 col-sm-12 pt-sm-2 residents_card">
-                                                <div class="card card-residents p-3">
-                                                Household
-                                                <i class="fa fa-residents fa-home" aria-hidden="true"><span class="fa-residents-span">{{ $householdCount }}</span></i>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-4 col-md-12 col-sm-12 pt-sm-2 residents_card">
-                                                <div class="card card-residents p-3">
-                                                Families
-                                                <i class="fa fa-residents fa-users" aria-hidden="true"><span class="fa-residents-span">{{ $familiesCount }}</span></i>
-                                                </div>
-                                            </div>
+                        <div class="card">                    
+                            <div class="jumbotron bg-white vertical-center">
+                                <div class="row row-header">
+                                    <div class="col-lg-4 col-md-12 col-sm-12 pt-sm-2 residents_card">
+                                        <div class="card card-residents p-3">
+                                        Residents
+                                        <i class="fa fa-residents fa-user" aria-hidden="true"><span class="fa-residents-span">{{ $userCount }}</span></i>
                                         </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-12 col-sm-12 pt-sm-2 residents_card">
+                                        <div class="card card-residents p-3">
+                                        Household
+                                        <i class="fa fa-residents fa-home" aria-hidden="true"><span class="fa-residents-span">{{ $householdCount }}</span></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-12 col-sm-12 pt-sm-2 residents_card">
+                                        <div class="card card-residents p-3">
+                                        Families
+                                        <i class="fa fa-residents fa-users" aria-hidden="true"><span class="fa-residents-span">{{ $familiesCount }}</span></i>
                                         </div>
                                     </div>
                                 </div>
+                                </div>
+                            </div>           
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered" id="dataTable">

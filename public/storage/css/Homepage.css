@@ -77,17 +77,15 @@ body {
 .nav-link {
     color: var(--quarternary-color);
     border-bottom: 5px solid transparent;
-    border-radius: 5px;
 }
 
 .nav-item :hover {
     color: var(--primary-color);
     background-color: var(--quarternary-color);
-    border-radius: 5px;
 }
 
 .nav-item {
-    font-size: larger;
+    font-size: 16px;
     margin-left: 10px;
 }
 
@@ -129,13 +127,41 @@ body {
 }
 
 #post-container {
-    border: 3px solid #FCC422;
     padding: 0px;
     border-radius: 10px;
+    border: 3px solid #FCC422;
     margin-top: 2%;
     background-color: #1E1E1E;
     color: white;
     height: 100%;
+}
+
+#date-container, #title-container ,#description-container, #tags-container {
+    padding: 20px;
+}
+
+#spacer-container {
+    margin-left: 20px; 
+    margin-right: 20px;
+}
+
+#spacer {
+    height: 5px; 
+    background-color: white;
+}
+
+#title {
+    line-height: 34px;
+    font-size: 28px; 
+    color: #FCC422;
+}
+
+#description-container {
+    padding-top: 0;
+}
+
+#more-info {
+    color: #FCC422;
 }
 
 #image-content {

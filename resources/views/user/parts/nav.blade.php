@@ -43,10 +43,12 @@
                        
                             @if(Auth::user()->role == 'Admin')
                                 <a class="dropdown-item" href="/admin">Admin</a>
+                            @elseif(Auth::user()->role == 'Content Manager')
+                                <a class="dropdown-item" href="/edit-officials">Manage Content</a>
                             @endif 
                        
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#"> 
+                            <a class="dropdown-item p-0" href="#"> 
                             @if(Auth::check())
                                 <form action="{{ url('logout') }}" method="POST">
                                     {{ csrf_field() }}
