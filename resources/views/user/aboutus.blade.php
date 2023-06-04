@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>About us</title>
     <link href="{{ asset('storage/node_modules/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{ asset('storage/css/Aboutus.css') }}" rel="stylesheet">
     <style>
         .btn-content {
@@ -111,39 +112,39 @@
                         <div class="container-fluid" id="title-container-a">
                             <span id="title" class="disp-content">Introduction</span>
                             @if(auth()->user()->role == 'Content Manager' || 'Admin')
-                            <button class="btn btn-warning introduction-edit btn-content">Edit</button>
+                            <button class="btn btn-warning introduction-edit btn-content" data-id="{{ $introduction->id }}">Edit</button>
                             @endif
                         </div>
                         <div class="container-fluid">
                             <hr>
                         </div>
                         <div class="container-fluid introduction-container" id="description-container-b">
-                            {!! $introduction !!}
+                            {!! $introduction->html_content !!}
                         </div>
                     </div>
                     @if(auth()->user()->role == 'Content Manager' || 'Admin')
                     <div class="container-fluid" id="content-container-a">
                         <div class="container-fluid" id="title-container-a">
                             <span id="title" class="disp-content">History</span>
-                            <button class="btn btn-warning history-edit-1 btn-content">Edit</button>
+                            <button class="btn btn-warning history-edit-1 btn-content" data-id="{{ $history->id }}">Edit</button>
                         </div>
                         <div class="container-fluid">
                             <hr>
                         </div>
                         <div class="container-fluid history-container-1" id="description-container-b">
-                            {!! $history !!}
+                            {!! $history->html_content !!}
                         </div>
                     </div>
                     <div class="container-fluid" id="content-container-a">
                         <div class="container-fluid" id="title-container-a">
                             <span id="title" class="disp-content"> cont. (History) </span>
-                            <button class="btn btn-warning history-edit-2 btn-content">Edit</button>
+                            <button class="btn btn-warning history-edit-2 btn-content" data-id="{{ $history_cont->id }}">Edit</button>
                         </div>
                         <div class="container-fluid">
                             <br>
                         </div>
                         <div class="container-fluid history-container-2" id="description-container-b">
-                            {!! $history_cont !!}
+                            {!! $history_cont->html_content !!}
                         </div>
                     </div>
                     @else
@@ -155,10 +156,10 @@
                             <hr>
                         </div>
                         <div class="container-fluid history-container-1" id="description-container-b">
-                            {!! $history !!}
+                            {!! $history->html_content !!}
                         </div>
                         <div class="container-fluid history-container-2" id="description-container-b">
-                            {!! $history_cont !!}
+                            {!! $history_cont->html_content !!}
                         </div>
                     </div>
                     @endif
@@ -171,28 +172,28 @@
                         <div class="container-fluid" id="title-container-a">
                             <span id="title" class="disp-content">Mission</span>
                             @if(auth()->user()->role == 'Content Manager' || 'Admin')
-                            <button class="btn btn-warning mission-edit btn-content">Edit</button>
+                            <button class="btn btn-warning mission-edit btn-content" data-id="{{ $mission->id }}">Edit</button>
                             @endif
                         </div>
                         <div class="container-fluid">
                             <hr>
                         </div>
                         <div class="container-fluid mission-container" id="description-container-b">
-                            {!! $mission !!}
+                            {!! $mission->html_content !!}
                         </div>
                     </div>
                     <div class="container-fluid" id="content-container-a">
                         <div class="container-fluid" id="title-container-a">
                             <span id="title" class="disp-content">Vision</span>
                             @if(auth()->user()->role == 'Content Manager' || 'Admin')
-                            <button class="btn btn-warning vision-edit btn-content">Edit</button>
+                            <button class="btn btn-warning vision-edit btn-content" data-id="{{ $vision->id }}">Edit</button>
                             @endif
                         </div>
                         <div class="container-fluid">
                             <hr>
                         </div>
                         <div class="container-fluid vision-container" id="description-container-b">
-                            {!! $vision !!}
+                            {!! $vision->html_content !!}
                         </div>
                     </div>
                     <hr id="spacer">
@@ -201,158 +202,79 @@
                     </div>
                     <hr id="spacer">
                     <div class="container-fluid" id="content-container-a">
-                        <div class="row">
-                            <div class="col-lg-3 col-sm-6" id="portrait-container">
+                        <div class="row" style="justify-content: space-evenly;">
+                            <div class="col-lg-4 col-sm-6" id="portrait-container">
+                                <hr>
+                                <span id="title">Barangay Officials</span>
+                                <hr>
                                 <div class="container-fluid" id="polaroid">
-                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
-                                    </div>
+                                    <img id="image" src="{{ $punong_barangay->photo ? asset(str_replace('public/', '', 'storage/' . $punong_barangay->photo)) : asset('storage/images/blank_profile_pic.webp') }}" >
+                                  
                                     <div class="container-fluid" id="name-container">
-                                        Adele
+                                        {{ $punong_barangay->name ?? '' }}
                                     </div>
                                     <div class="container-fluid" id="description-container-c">
-                                        The Quick Brown Fox Jumps Over The Lazy Dog
+                                        {{ $punong_barangay->position ?? '' }}
                                     </div>
                                 </div>
+                                <hr>
+                                <span id="title">Barangay Kagawad</span>
+                                <hr>
+
+                                @for ($i = 0; $i < count($barangay_kagawad); $i += 2)
+                                <div class="row">
+                                    @for ($j = $i; $j < min($i + 2, count($barangay_kagawad)); $j++)
+                                        <div class="col-lg-6 col-sm-6" id="portrait-container">
+                                            <div class="container-fluid" id="polaroid">
+                                                <div style="background-image: url('{{ asset(str_replace('public/', '', 'storage/' . $barangay_kagawad[$j]['photo'])) ?? 'storage/images/blank_profile_pic.webp' }}');'" id="image-2">
+                                                </div>
+                                                <div class="container-fluid" id="name-container">
+                                                    {{ $barangay_kagawad[$j]['name'] ?? 'Official' }}
+                                                </div>
+                                                <div class="container-fluid" id="description-container-c">
+                                                    {{ $barangay_kagawad[$j]['position'] ?? 'Position' }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endfor
+                                </div>
+                                @endfor
                             </div>
-                            <div class="col-lg-3 col-sm-6" id="portrait-container">
+                            <div class="col-lg-4 col-sm-6" id="portrait-container">
+                                <hr>
+                                <span id="title">SK Officials</span>
+                                <hr>
                                 <div class="container-fluid" id="polaroid">
-                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
-                                    </div>
+                                <img id="image" src="{{ $punong_barangay->photo ? asset(str_replace('public/', '', 'storage/' . $sk_chairperson->photo)) : asset('storage/images/blank_profile_pic.webp') }}" >
                                     <div class="container-fluid" id="name-container">
-                                        Adele
+                                        {{ $sk_chairperson->name ?? '' }}
                                     </div>
                                     <div class="container-fluid" id="description-container-c">
-                                        The Quick Brown Fox Jumps Over The Lazy Dog
+                                        {{ $sk_chairperson->position ?? '' }}
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6" id="portrait-container">
-                                <div class="container-fluid" id="polaroid">
-                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
-                                    </div>
-                                    <div class="container-fluid" id="name-container">
-                                        Adele
-                                    </div>
-                                    <div class="container-fluid" id="description-container-c">
-                                        The Quick Brown Fox Jumps Over The Lazy Dog
-                                    </div>
+                                <hr>
+                                <span id="title">SK Kagawad</span>
+                                <hr>
+    
+                                @for ($i = 0; $i < count($sk_kagawad); $i += 2)
+                                <div class="row">
+                                    @for ($j = $i; $j < min($i + 2, count($sk_kagawad)); $j++)
+                                        <div class="col-lg-6 col-sm-6" id="portrait-container">
+                                            <div class="container-fluid" id="polaroid">
+                                                <div style="background-image: url('storage/images/blank_profile_pic.webp');" id="image-2">
+                                                </div>
+                                                <div class="container-fluid" id="name-container">
+                                                    {{ $sk_kagawad[$j]['name'] ?? 'Official' }}
+                                                </div>
+                                                <div class="container-fluid" id="description-container-c">
+                                                    {{ $sk_kagawad[$j]['position'] ?? 'Position' }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endfor
                                 </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6" id="portrait-container">
-                                <div class="container-fluid" id="polaroid">
-                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
-                                    </div>
-                                    <div class="container-fluid" id="name-container">
-                                        Adele
-                                    </div>
-                                    <div class="container-fluid" id="description-container-c">
-                                        The Quick Brown Fox Jumps Over The Lazy Dog
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container-fluid" id="content-container-a" style="padding-top: 0;">
-                        <div class="row">
-                            <div class="col-lg-3 col-sm-6" id="portrait-container">
-                                <div class="container-fluid" id="polaroid">
-                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
-                                    </div>
-                                    <div class="container-fluid" id="name-container">
-                                        Adele
-                                    </div>
-                                    <div class="container-fluid" id="description-container-c">
-                                        The Quick Brown Fox Jumps Over The Lazy Dog
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6" id="portrait-container">
-                                <div class="container-fluid" id="polaroid">
-                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
-                                    </div>
-                                    <div class="container-fluid" id="name-container">
-                                        Adele
-                                    </div>
-                                    <div class="container-fluid" id="description-container-c">
-                                        The Quick Brown Fox Jumps Over The Lazy Dog
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6" id="portrait-container">
-                                <div class="container-fluid" id="polaroid">
-                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
-                                    </div>
-                                    <div class="container-fluid" id="name-container">
-                                        Adele
-                                    </div>
-                                    <div class="container-fluid" id="description-container-c">
-                                        The Quick Brown Fox Jumps Over The Lazy Dog
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6" id="portrait-container">
-                                <div class="container-fluid" id="polaroid">
-                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
-                                    </div>
-                                    <div class="container-fluid" id="name-container">
-                                        Adele
-                                    </div>
-                                    <div class="container-fluid" id="description-container-c">
-                                        The Quick Brown Fox Jumps Over The Lazy Dog
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container-fluid" id="content-container-a" style="padding-top: 0;">
-                        <div class="row">
-                            <div class="col-lg-3 col-sm-6" id="portrait-container">
-                                <div class="container-fluid" id="polaroid">
-                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
-                                    </div>
-                                    <div class="container-fluid" id="name-container">
-                                        Adele
-                                    </div>
-                                    <div class="container-fluid" id="description-container-c">
-                                        The Quick Brown Fox Jumps Over The Lazy Dog
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6" id="portrait-container">
-                                <div class="container-fluid" id="polaroid">
-                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
-                                    </div>
-                                    <div class="container-fluid" id="name-container">
-                                        Adele
-                                    </div>
-                                    <div class="container-fluid" id="description-container-c">
-                                        The Quick Brown Fox Jumps Over The Lazy Dog
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6" id="portrait-container">
-                                <div class="container-fluid" id="polaroid">
-                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
-                                    </div>
-                                    <div class="container-fluid" id="name-container">
-                                        Adele
-                                    </div>
-                                    <div class="container-fluid" id="description-container-c">
-                                        The Quick Brown Fox Jumps Over The Lazy Dog
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6" id="portrait-container">
-                                <div class="container-fluid" id="polaroid">
-                                    <div style="background-image: url('storage/res/img/sample/7588.webp');" id="image">
-                                    </div>
-                                    <div class="container-fluid" id="name-container">
-                                        Adele
-                                    </div>
-                                    <div class="container-fluid" id="description-container-c">
-                                        The Quick Brown Fox Jumps Over The Lazy Dog
-                                    </div>
-                                </div>
+                                @endfor
                             </div>
                         </div>
                     </div>
@@ -375,6 +297,39 @@
     @if(auth()->user()->role == 'Content Manager' || 'Admin')
     <script src="{{ asset('storage/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('storage/ckeditor/aboutus.config.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+        $('.introduction-edit-btn').click(function() {
+            // Create Bootstrap modal
+            var modal = $(
+            '<div class="modal fade" tabindex="-1" role="dialog">' +
+                '<div class="modal-dialog" role="document">' +
+                    '<div class="modal-content">' +
+                        '<div class="modal-header">' +
+                            '<h5 class="modal-title">Content Edited</h5>' +
+                            '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>' +
+                            '</div>' +
+                            '<div class="modal-body">' +
+                            '<p>Content edited successfully!</p>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</div>');
+
+            // Append modal to the body
+            $('body').append(modal);
+
+            // Show the modal
+            modal.modal('show');
+
+            // Remove the modal from the DOM when it is hidden
+            modal.on('hidden.bs.modal', function() {
+            modal.remove();
+            });
+        });
+        });
+    </script>
+
     @endif
 </body>
 @endauth

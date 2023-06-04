@@ -249,21 +249,20 @@
 
 <!-- AJAX -->
 <script>
-    $(document).ready(function() {
-        $('.btn-edit').click(function() {
-            var userId = $(this).data('user-id');
-            fetchUserDetails(userId);
+    document.querySelectorAll('.btn-edit').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var userId = this.getAttribute('data-user-id');
+            fetchUserDetails(userId)
         });
+    });
 
-        $('#editModal').on('hidden.bs.modal', function() {
-            $(this).find(':input').attr('tabindex', '-1');
-        });
-
-        function fetchUserDetails(userId) {
-            $.ajax({
-                url: '/admin/get/' + userId,
-                method: 'GET',
-                success: function(response) {
+    function fetchUserDetails(userId) {
+        $.ajax({
+            url: '/admin/get/' + userId,
+            method: 'GET',
+            success: function(response) {
+   
+                $(document).ready(function() {
                     // Update the modal content with the fetched details
                     $('#editModal input[name="f_name"]').val(response.information.first_name);
                     $('#editModal input[name="m_name"]').val(response.information.middle_name);
@@ -278,11 +277,15 @@
 
                     actionRoute = "{{ route('admin.user_update', 'userID') }}".replace('userID', response.user.id);
                     $('#editModal form').attr('action', actionRoute);
-                },
-                error: function(xhr, status, error) {
-                    // Handle error if necessary
-                }
-            });
-        }
-});
+
+                    $('#editModal').on('hidden.bs.modal', function() {
+                        $(this).find(':input').attr('tabindex', '-1');
+                    });
+                });
+            },
+            // error: function(xhr, status, error) {
+            //     // Handle error if necessary
+            // }
+        });
+    }
 </script>

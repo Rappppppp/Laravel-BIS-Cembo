@@ -12,6 +12,8 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
+
 
 class AdminController extends Controller
 {
@@ -19,9 +21,9 @@ class AdminController extends Controller
     public function index()
     {
         $users = User::search()
+            ->where('role', '!=', 'Admin')
             ->orderBy('name')
-            ->paginate(20)
-            ->where('role', '!=', 'Admin');
+            ->get();
 
         // Get the sum data of number of household, families household and number of users registered.
         $makatizen_infos = MakatizenRegistryModel::select('num_household', 'num_families_household')->get();
@@ -171,21 +173,27 @@ class AdminController extends Controller
         if ($request['official_name'] == '')
             return redirect()->route('admin.officials')->with('error', "Error! Please select a Barangay Official!");
 
-        if ($request->hasFile('official_photo') && $request->file('official_photo')->isValid()) {
-            $path = $request->file('official_photo')->store('public/official_photos');
-            BarangayOfficialsModel::create([
-                'name' => $request['official_name'],
-                'position' => $request['official_title'],
-                'photo' => $path
-            ]);
-        } else {
-            BarangayOfficialsModel::create([
-                'name' => $request['official_name'],
-                'position' => $request['official_title'],
-            ]);
-        }
+        if ($request['official_photo'] == '')
+            return redirect()->route('admin.officials')->with('error', "Null Image!");
 
-        return redirect()->route('admin.officials')->with('success', 'Barangay Official Successfuly Added!');
+        // if ($request->hasFile('official_photo') && $request->file('official_photo')->isValid()) {
+        // $path = $request->input('image')->store('public/official_photos');
+
+        $photo = $request['official_photo'];
+        // $base64image = preg_replace('/data:image\/(.*?);base64,/', '', $photo);
+
+        // Decode the base64 data
+        $imageData = base64_decode($photo);
+
+        BarangayOfficialsModel::create([
+            'name' => $request['official_name'],
+            'position' => $request['official_title'],
+            'photo' => $request['official_photo']
+        ]);
+
+        // }
+        // return response()->json(['message' => "Barangay Official Successfuly Added!"]);
+        return redirect()->route('admin.officials')->with('success', "Barangay Official Successfuly Added!");
     }
 
     public function removeBarangayOfficial($id)

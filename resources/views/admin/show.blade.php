@@ -123,8 +123,11 @@
                                                 <td>{{ $makatizen->years_barangay_cembo }}</td>
                                                 <td>{{ $makatizen->years_current_address }}</td>
                                                 <td>{{ $makatizen->relationship_head_family }}</td>
+
                                                 @if($makatizen->yellow_card || $makatizen->blue_card || $makatizen->white_card || $makatizen->makatizen_card || $makatizen->philhealth_card)
                                                 <td>{{ implode(', ', array_filter([card_name($makatizen->yellow_card, 'Yellow Card'), card_name($makatizen->blue_card, 'Blue Card'), card_name($makatizen->white_card, 'White Card'), card_name($makatizen->makatizen_card, 'Makatizen Card'), card_name($makatizen->philhealth_card, 'PhilHealth Card')] )) }}</td>
+                                                @else
+                                                <td>None</td>
                                                 @endif
 
                                                 @php

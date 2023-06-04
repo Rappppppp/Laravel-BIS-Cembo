@@ -23,8 +23,13 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
+    $Official_Admin = 'role:Barangay Official,Admin';
+    $ContentManager_Admin = 'role:Content Manager,Admin';
+    $Admin = 'role:Admin';
+
     // User - Homepage
     Route::group(['middleware' => ['registration_completed']], function () {
+
         Route::get('/', [HomepageController::class, 'index'])->name('user.homepage');
 
         Route::get('/services', function () {
@@ -47,7 +52,7 @@ Route::middleware([
             return view('user.services.maintenance');
         });
 
-        Route::get('/aboutus', [AppContentController::class, 'display']);
+        Route::get('/aboutus', [AppContentController::class, 'aboutus_content']);
 
         // Request Documents - User
         Route::get('/documents', [DocumentController::class, 'index'])->name('documents');
@@ -59,10 +64,6 @@ Route::middleware([
         Route::post('/complaints/submit', [ComplaintController::class, 'submit'])->name('complaints.submit');
 
     });
-
-    $Official_Admin = 'role:Barangay Official,Admin';
-    $ContentManager_Admin = 'role:Content Manager,Admin';
-    $Admin = 'role:Admin';
 
     // Admin / Brgy Official - User Tables
     Route::get('/admin', function () {
@@ -81,7 +82,9 @@ Route::middleware([
     // Charts
     Route::get('/admin/charts', [AdminController::class, 'charts'])->name('admin.charts')->middleware('auth', $Official_Admin);
 
-    // Add/Edit/Delete Barangay Officials - Admin only
+    // Content Manager and Admin
+    Route::post('/aboutus/update-content/{id}', [AppContentController::class, 'aboutus_update_content'])->middleware('auth', $ContentManager_Admin);
+    // Add/Edit/Delete Barangay Officials - Content Manager and Admin
     Route::get('/admin/officials', [AdminController::class, 'barangayOfficials'])
         ->name('admin.officials')
         ->middleware('auth', $ContentManager_Admin);
