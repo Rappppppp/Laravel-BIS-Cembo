@@ -1,8 +1,6 @@
 <!doctype html> 
 <head>
     @include('admin.components.head')
-    <!-- <script src="https://unpkg.com/pdf-lib"></script>
-    <script src="https://unpkg.com/downloadjs@1.4.7"></script> -->
     <script src="{{ asset('storage/pdf-lib/lib.js') }}"></script>
     <script src="{{ asset('storage/pdf-lib/dl-lib.js') }}"></script>
 </head>

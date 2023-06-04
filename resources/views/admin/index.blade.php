@@ -44,7 +44,7 @@
               
                     <div class="parallax-bg-img">
                         <div class="card">                    
-                            <div class="jumbotron bg-white vertical-center">
+                            <div class="jumbotron bg-white vertical-center" style="background-color: #1a2244!important;">
                                 <div class="row row-header">
                                     <div class="col-lg-4 col-md-12 col-sm-12 pt-sm-2 residents_card">
                                         <div class="card card-residents p-3">

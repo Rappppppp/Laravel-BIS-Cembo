@@ -20,7 +20,7 @@
 				<div class="container-fluid" id="login-form-container">
 					<div class="col" id="form-content-container">
 						<div class="row">
-							<img src="{{ asset('storage/res/img/logo/logo.png') }}" id="logo">
+							<img src="{{ asset('storage/res/img/logo/cembo-logo.png') }}" id="logo">
 						</div>
 						<form action="{{ route('login') }}" method="POST" autocomplete="off">
 						@csrf

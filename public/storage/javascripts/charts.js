@@ -16,6 +16,25 @@ const bColor = [
     'rgba(255, 159, 64)'
 ]
 
+const pie_json = {
+    responsive: true,
+    maintainAspectRatio: false,
+    layout: {
+        padding: {
+            bottom: 20 // Set the bottom margin value
+        }
+    },
+    scales: {
+      x: {
+        display: false, // Remove the x-axis line and labels
+      },
+      y: {
+        display: false, // Remove the y-axis line and labels
+        beginAtZero: true,
+      },
+    },
+  }
+
 // Use the variables in your Chart.js configuration
 const chart_gender = document.getElementById('gender')
 new Chart(chart_gender, {
@@ -27,17 +46,9 @@ new Chart(chart_gender, {
             backgroundColor: bgColor,
             borderColor: bColor,
             borderWidth: 1
-        }]
+        }],
     },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true,
-            }
-        }
-    }
+    options: pie_json
 })
 
 const chart_age = document.getElementById('ages')
@@ -52,15 +63,7 @@ new Chart(chart_age, {
             borderWidth: 1.2
         }]
     },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
+    options: pie_json
 });
 
 const chart_ss = document.getElementById('social_sector')
@@ -75,15 +78,7 @@ new Chart(chart_ss, {
             borderWidth: 1.5
         }]
     },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true,
-            }
-        }
-    }
+    options: pie_json
 })
 
 const chart_status = document.getElementById('civil_status')
@@ -98,40 +93,8 @@ new Chart(chart_status, {
             borderWidth: 1
         }]
     },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
+    options: pie_json
 });
-
-
-const chart_religion = document.getElementById('religion')
-new Chart(chart_religion, {
-    type: 'bar',
-    data: {
-        labels: ['ROMAN CATHOLIC', 'IGLESIA NI CRISTO', 'MUSLIM', 'BORN AGAIN', 'SEVENTH DAY ADVENTIST', 'SAKSI NI JEHOVAH', 'MORMONS', 'BUDDHIST', 'OTHERS'],
-        datasets: [{
-            data: [catholic, iglesia, muslim, bornAgain, adventist, jehovah, mormons, buddhist, otherReligion],
-            backgroundColor: bgColor,
-            borderColor: bColor,
-            borderWidth: 1
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true,
-            }
-        }
-    }
-})
 
 
 const chart_cards = document.getElementById('cards')
@@ -163,21 +126,140 @@ const chart_vaccine = document.getElementById('vaccinated')
 new Chart(chart_vaccine, {
     type: 'bar',
     data: {
-        labels: ['FULLY VACCINATED', 'SINGLE DOSE', 'VACCINE EXEMPT', 'UNVACCINATED'],
-        datasets: [{
-            data: [vaccinated, singleDose, vaccineExempt, unvaccinated],
-            backgroundColor: bgColor,
-            borderColor: bColor,
-            borderWidth: 1
-        }]
+        labels: [''],
+        datasets: [
+            {
+                label: 'FULLY VACCINATED',
+                data: [vaccinated],
+                backgroundColor: bgColor[0],
+                borderColor: bColor[0],
+                borderWidth: 1
+            },
+            {
+                label: 'SINGLE DOSE',
+                data: [singleDose],
+                backgroundColor: bgColor[1],
+                borderColor: bColor[1],
+                borderWidth: 1
+            },
+            {
+                label: 'VACCINE EXEMPT',
+                data: [vaccineExempt],
+                backgroundColor: bgColor[2],
+                borderColor: bColor[2],
+                borderWidth: 1
+            },
+            {
+                label: 'UNVACCINATED',
+                data: [unvaccinated],
+                backgroundColor: bgColor[3],
+                borderColor: bColor[3],
+                borderWidth: 1
+            }
+        ]
     },
     options: {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
-            y: {
-                beginAtZero: true,
-            }
+          y: {
+            beginAtZero: true,
+          }
         }
-    }
+      }
 })
+
+
+const chart_religion = document.getElementById('religion')
+new Chart(chart_religion, {
+    type: 'bar',
+    data: {
+      labels: [''],
+      datasets: [
+        {
+            label: 'Roman Catholic',
+            data: [catholic],
+            backgroundColor: bgColor[0],
+            borderWidth: 1,
+            borderColor: '#fff',
+            hoverOffset: 4
+        },
+        {
+            label: 'Iglesia Ni Cristo',
+            data: [iglesia],
+            backgroundColor: bgColor[1],
+            borderWidth: 1,
+            borderColor: '#fff',
+            hoverOffset: 4
+        },
+        {
+            label: 'Muslim',
+            data: [muslim],
+            backgroundColor: bgColor[2],
+            borderWidth: 1,
+            borderColor: '#fff',
+            hoverOffset: 4
+        },
+        {
+            label: 'Born Again',
+            data: [bornAgain],
+            backgroundColor: bgColor[3],
+            borderWidth: 1,
+            borderColor: '#fff',
+            hoverOffset: 4
+        },
+        {
+            label: 'Seventh Day Adventist',
+            data: [adventist],
+            backgroundColor: bgColor[4],
+            borderWidth: 1,
+            borderColor: '#fff',
+            hoverOffset: 4
+        },
+        {
+            label: 'Saksi Ni Jehovah',
+            data: [jehovah],
+            backgroundColor: bgColor[5],
+            borderWidth: 1,
+            borderColor: '#fff',
+            hoverOffset: 4
+        },
+        {
+            label: 'Mormons',
+            data: [mormons],
+            backgroundColor: bgColor[0],
+            borderWidth: 1,
+            borderColor: '#fff',
+            hoverOffset: 4
+        },
+        {
+            label: 'Buddhist',
+            data: [buddhist],
+            backgroundColor: bgColor[1],
+            borderWidth: 1,
+            borderColor: '#fff',
+            hoverOffset: 4
+        },
+        {
+            label: 'Other Religions',
+            data: [otherReligion],
+            backgroundColor: bgColor[2],
+            borderWidth: 1,
+            borderColor: '#fff',
+            hoverOffset: 4
+        },
+
+    ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'right'
+        }
+      }
+    }
+  });
+  

@@ -32,27 +32,9 @@ Route::middleware([
 
         Route::get('/', [HomepageController::class, 'index'])->name('user.homepage');
 
-        Route::get('/services', function () {
-            return view('user.services.index');
-        });
+        Route::get('/services', [AppContentController::class, 'services_content']);
 
-        Route::get('/services/agricultural', function () {
-            return view('user.services.agricultural');
-        });
-
-        Route::get('/services/fire-dept', function () {
-            return view('user.services.fire-dept');
-        });
-
-        Route::get('/services/health-center', function () {
-            return view('user.services.health-center');
-        });
-
-        Route::get('/services/maintenance', function () {
-            return view('user.services.maintenance');
-        });
-
-        Route::get('/aboutus', [AppContentController::class, 'aboutus_content']);
+        Route::get('/aboutus', [AppContentController::class, 'aboutus_content'])->name('user.aboutus');
 
         // Request Documents - User
         Route::get('/documents', [DocumentController::class, 'index'])->name('documents');
@@ -83,26 +65,14 @@ Route::middleware([
     Route::get('/admin/charts', [AdminController::class, 'charts'])->name('admin.charts')->middleware('auth', $Official_Admin);
 
     // Content Manager and Admin
-    Route::post('/aboutus/update-content/{id}', [AppContentController::class, 'aboutus_update_content'])->middleware('auth', $ContentManager_Admin);
-    // Add/Edit/Delete Barangay Officials - Content Manager and Admin
-    Route::get('/admin/officials', [AdminController::class, 'barangayOfficials'])
-        ->name('admin.officials')
-        ->middleware('auth', $ContentManager_Admin);
-    Route::post('/admin/officials/add', [AdminController::class, 'addBarangayOfficials'])
-        ->name('admin.officials.add')
-        ->middleware('auth', $ContentManager_Admin); // Will switch back to admin
-    Route::delete('/admin/officials/remove/{id}', [AdminController::class, 'removeBarangayOfficial'])
-        ->name('admin.officials.remove')
-        ->middleware('auth', $ContentManager_Admin);
+    Route::post('/update-content/{id}', [AppContentController::class, 'update_content'])->middleware('auth', $ContentManager_Admin);
 
-    Route::get('/edit-officials', [AdminController::class, 'barangayOfficials'])
-        ->name('edit.officials')
-        ->middleware('auth', $ContentManager_Admin);
-    Route::post('/edit-officials/add', [AdminController::class, 'addBarangayOfficials'])
-        ->name('edit.officials.add')
+    // Add/Edit/Delete Barangay Officials - Content Manager and Admin
+    Route::post('/aboutus/officials/add', [AppContentController::class, 'addBarangayOfficials'])
+        ->name('user.officials.add')
         ->middleware('auth', $ContentManager_Admin); // Will switch back to admin
-    Route::delete('/edit-officials/remove/{id}', [AdminController::class, 'removeBarangayOfficial'])
-        ->name('edit.officials.remove')
+    Route::delete('/aboutus/officials/remove/{id}', [AppContentController::class, 'removeBarangayOfficial'])
+        ->name('user.officials.remove')
         ->middleware('auth', $ContentManager_Admin);
 
     // Facebook Posts

@@ -108,7 +108,6 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'User deleted successfully.');
     }
 
-    // Document
     public function documentRequests()
     {
         $requests = DocumentModel::with('user')->orderBy('created_at', 'desc')->get();
@@ -118,7 +117,7 @@ class AdminController extends Controller
             $document->barangay_id = $user ? $user->barangay_id : '';
             return $document;
         });
-        return view('admin.documentRequests', compact('requests'));
+        return view('admin.document_requests', compact('requests'));
     }
 
     public function documentShow($document_type, $document_id, $barangay_id)
@@ -137,7 +136,6 @@ class AdminController extends Controller
         } else if ($document_type == 'Indigency') {
             return view('admin.document_indigency', compact('user', 'contact', 'document'));
         }
-
     }
 
     public function complaintShow($id)
@@ -145,7 +143,7 @@ class AdminController extends Controller
         $complaint = ComplaintModel::join('users', 'users.id', '=', 'complaints.user_id')
             ->select('complaints.*', 'users.name')
             ->find($id);
-        return view('admin.complaintShow')->with('request', $complaint);
+        return view('admin.complaint_show')->with('request', $complaint);
     }
 
     // Complaints
@@ -158,52 +156,7 @@ class AdminController extends Controller
             $complaint->barangay_id = $user ? $user->barangay_id : '';
             return $complaint;
         });
-        return view('admin.complaintRequests', compact('requests'));
-    }
-
-    public function barangayOfficials()
-    {
-        $addedOfficials = BarangayOfficialsModel::all();
-        $officials = User::where('role', '=', 'Barangay Official')->get();
-        return view('admin.officials', compact('officials', 'addedOfficials'));
-    }
-
-    public function addBarangayOfficials(Request $request)
-    {
-        if ($request['official_name'] == '')
-            return redirect()->route('admin.officials')->with('error', "Error! Please select a Barangay Official!");
-
-        if ($request['official_photo'] == '')
-            return redirect()->route('admin.officials')->with('error', "Null Image!");
-
-        // if ($request->hasFile('official_photo') && $request->file('official_photo')->isValid()) {
-        // $path = $request->input('image')->store('public/official_photos');
-
-        $photo = $request['official_photo'];
-        // $base64image = preg_replace('/data:image\/(.*?);base64,/', '', $photo);
-
-        // Decode the base64 data
-        $imageData = base64_decode($photo);
-
-        BarangayOfficialsModel::create([
-            'name' => $request['official_name'],
-            'position' => $request['official_title'],
-            'photo' => $request['official_photo']
-        ]);
-
-        // }
-        // return response()->json(['message' => "Barangay Official Successfuly Added!"]);
-        return redirect()->route('admin.officials')->with('success', "Barangay Official Successfuly Added!");
-    }
-
-    public function removeBarangayOfficial($id)
-    {
-        try {
-            BarangayOfficialsModel::destroy($id);
-            return redirect()->route('admin.officials')->with('success', 'Barangay Official Successfully Deleted!');
-        } catch (\Exception $e) {
-            return redirect()->route('admin.officials')->with('error', 'Error Deleting Barangay Official: ' . $e->getMessage());
-        }
+        return view('admin.complaint_requests', compact('requests'));
     }
 
     public function content()
@@ -220,10 +173,8 @@ class AdminController extends Controller
             'approvedBy' => '[Approved By]'
 
         ]);
-
         return view('emails.complaintApproved', compact('mailData'));
     }
-
 
     public function charts()
     {

@@ -8,6 +8,11 @@
     
     <link href="{{ asset('storage/node_modules/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('storage/css/Homepage.css') }}" rel="stylesheet">
+    <style>
+        a.nav-link{
+            border-radius: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -15,15 +20,7 @@
         <!-- Nav -->
         <header>
             <div class="container-fluid" id="nav">
-                <div class="navbar-toggler d-sm-block d-lg-none d-md-none" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapsibleNavbar" id="logo-container">
-                    <img src="{{ asset('storage/res/img/logo/logo.png') }}" class="img-fluid rounded-circle" id="logo">
-                </div>
-
-                <div class="container-fluid d-lg-block d-md-block d-sm-none d-none" id="logo-container">
-                    <img src="{{ asset('storage/res/img/logo/logo.png') }}" class="img-fluid rounded-circle" id="logo">
-                </div>
-
+                @include('user.parts.dropdown_logo')
                 <nav class="navbar navbar-expand-md">
                     <div class="collapse navbar-collapse" id="collapsibleNavbar">
                         <ul class="navbar-nav">
@@ -45,46 +42,7 @@
                                 <a class="nav-link" href="/aboutus">About Us</a>
                             </li>
                         </ul>
-                        @auth 
-                        <ul class="navbar-nav" style="margin-left: auto; margin-right: 5%;">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    
-                                    {{ Auth::user()->personalInformation->first_name }} {{ Auth::user()->personalInformation->last_name }}
-                            
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            
-                                    @if(Auth::user()->role == 'Admin')
-                                        <a class="dropdown-item" href="/admin">Admin</a>
-                                    @elseif(Auth::user()->role == 'Content Manager')
-                                        <a class="dropdown-item" href="/edit-officials">Manage Content</a>
-                                    @endif 
-                            
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item p-0" href="#"> 
-                                    @if(Auth::check())
-                                        <form action="{{ url('logout') }}" method="POST">
-                                            {{ csrf_field() }}
-                                            <button type="submit" class="dropdown-item">Log Out
-                                            </button>
-                                        </form>
-                                    @endif</a>
-                                </div>
-                            </li>
-                        </ul>
-                        @endauth
-                        @guest
-                        <ul class="navbar-nav" style="margin-left: auto; margin-right: 5%;">
-                            <li>   
-                                <a class="nav-link" href="/register" id="navbarDropdown" role="button">Register</a>     
-                            </li>
-                            <li class="navbar-nav" style=" margin-right: 5%;">  
-                                <a class="nav-link" href="/login" id="navbarDropdown" role="button">Login</a>  
-                            </li>
-                        </ul>
-                        @endguest
+                        @include('user.parts.dropdown_auth')
                     </div>
                 </nav>
             </div>
@@ -162,14 +120,9 @@
             </div>
         </main>
         <!-- Footer -->
-        <footer class="page-footer">
-            <div class="container-fluid" id="footer-footer">
-                <div class="container" id="bottom">
-                    <p>Copyright &copy; 2022</p>
-                </div>
-            </div>
-        </footer>
+        @include('user.parts.footer')
     </div>
+    <script src="{{ asset('storage/javascripts/jquery.js') }}"></script>
     <script src="{{ asset('storage/node_modules/@popperjs/core/dist/umd/popper.min.js') }}"></script>
     <script src="{{ asset('storage/node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 </body>

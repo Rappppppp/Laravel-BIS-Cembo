@@ -23,7 +23,7 @@ $nationals = array('Afghan','Albanian','Algerian','American','Andorran','Angolan
 				<div class="container-fluid" id="register-form-container-0">
 					<div class="col" id="form-content-container">
 						<div class="row">
-							<img src="{{ asset('storage/res/img/logo/logo.png') }}" id="logo">
+							<img src="{{ asset('storage/res/img/logo/cembo-logo.png') }}" id="logo">
 						</div>
 						<form method="POST" action="{{ route('register') }}">
 						@csrf
@@ -75,7 +75,7 @@ $nationals = array('Afghan','Albanian','Algerian','American','Andorran','Angolan
 				<div class="container-fluid" id="register-form-container-1" style="display: none;">
 					<div class="col" id="form-content-container">
 						<div class="row">
-							<img src="{{ asset('storage/res/img/logo/logo.png') }}" id="logo">
+							<img src="{{ asset('storage/res/img/logo/cembo-logo.png') }}" id="logo">
 						</div>
 						<div class="row" id="register-field-container">
 							<div class="col">
@@ -148,7 +148,7 @@ $nationals = array('Afghan','Albanian','Algerian','American','Andorran','Angolan
 				<div class="container-fluid" id="register-form-container-2" style="display: none;">
 					<div class="col" id="form-content-container">
 						<div class="row">
-							<img src="{{ asset('storage/res/img/logo/logo.png') }}" id="logo">
+							<img src="{{ asset('storage/res/img/logo/cembo-logo.png') }}" id="logo">
 						</div>
 						<div class="row" id="register-field-container">
 							<div class="col">
@@ -251,7 +251,7 @@ $nationals = array('Afghan','Albanian','Algerian','American','Andorran','Angolan
 				<div class="container-fluid" id="register-form-container-3" style="display: none;">
 					<div class="col" id="form-content-container">
 						<div class="row">
-							<img src="{{ asset('storage/res/img/logo/logo.png') }}" id="logo">
+							<img src="{{ asset('storage/res/img/logo/cembo-logo.png') }}" id="logo">
 						</div>
 						<div class="row" id="register-field-container">
 							<div class="col">
@@ -289,7 +289,7 @@ $nationals = array('Afghan','Albanian','Algerian','American','Andorran','Angolan
 				<div class="container-fluid" id="register-form-container-4" style="display: none;">
 					<div class="col" id="form-content-container">
 						<div class="row">
-							<img src="{{ asset('storage/res/img/logo/logo.png') }}" id="logo">
+							<img src="{{ asset('storage/res/img/logo/cembo-logo.png') }}" id="logo">
 						</div>
 						<div class="row" id="register-field-container">
 							<div class="col">
@@ -325,7 +325,7 @@ $nationals = array('Afghan','Albanian','Algerian','American','Andorran','Angolan
 				<div class="container-fluid" id="register-form-container-5" style="display: none;">
 					<div class="col" id="form-content-container">
 						<div class="row">
-							<img src="{{ asset('storage/res/img/logo/logo.png') }}" id="logo">
+							<img src="{{ asset('storage/res/img/logo/cembo-logo.png') }}" id="logo">
 						</div>
 						<div class="row" id="register-field-container">
 							<div class="col">
@@ -468,7 +468,7 @@ $nationals = array('Afghan','Albanian','Algerian','American','Andorran','Angolan
 				<div class="container-fluid" id="register-form-container-6" style="display: none;">
 					<div class="col" id="form-content-container">
 						<div class="row">
-							<img src="{{ asset('storage/res/img/logo/logo.png') }}" id="logo">
+							<img src="{{ asset('storage/res/img/logo/cembo-logo.png') }}" id="logo">
 						</div>
 						<div class="row" id="register-field-container">
 							<div class="col">
@@ -510,7 +510,7 @@ $nationals = array('Afghan','Albanian','Algerian','American','Andorran','Angolan
 				<div class="container-fluid" id="register-form-container-7" style="display: none;">
 					<div class="col" id="form-content-container">
 						<div class="row">
-							<img src="{{ asset('storage/res/img/logo/logo.png') }}" id="logo">
+							<img src="{{ asset('storage/res/img/logo/cembo-logo.png') }}" id="logo">
 						</div>
 						<div class="row" id="register-field-container">
 							<div class="col">

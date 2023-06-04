@@ -243,13 +243,7 @@
             </div>
         </main>
         <!-- Footer -->
-        <footer class="page-footer">
-            <div class="container-fluid" id="footer-footer">
-                <div class="container" id="bottom">
-                    <p>Copyright &copy; 2022</p>
-                </div>
-            </div>
-        </footer>
+        @include('user.parts.footer')
     </div>
 
 

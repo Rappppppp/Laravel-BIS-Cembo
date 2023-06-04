@@ -1,6 +1,7 @@
 <!doctype html> 
 <head>
     @include('admin.components.head')
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <style>
         .residents_card
         {
@@ -18,6 +19,14 @@
         {
             margin-left: 1rem;
         }
+        #vaccinated,
+        #cards,
+        #religion {
+            display: block;
+            box-sizing: border-box;
+            height: 30rem;
+            width: 688px;
+        }
     </style> 
 </head>
 <body>
@@ -30,7 +39,7 @@
             <main>
             <div id="content">
                 <div class="parallax-bg-img" style="background-image: url('res/Rectangle\ 68.png');">
-                    <div class="jumbotron bg-white vertical-center">
+                    <div class="jumbotron bg-white vertical-center" style="background-color: #1a2244!important;">
                         <div class="row row-header pb-5">
 
                             <div class="col-lg-4 col-md-12 col-sm-12 pt-sm-2 residents_card">
@@ -108,7 +117,7 @@
 
                             <div class="col-lg-6 mt-sm-3">
                                 <div class="card">
-                                    <h3>Vaccinated</h3>
+                                    <h3>COVID-19 Vaccine Status</h3>
                                     <div class="chart-container">
                                         <canvas id="vaccinated"></canvas>
                                     </div>
@@ -137,6 +146,7 @@
 <script src="{{ asset('storage/javascripts/admin_homepage.js') }}"></script>
 <script src="{{ asset('storage/javascripts/bootstrap.min.js') }}"></script>
 <!-- CHARTS.JS -->
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-piechart-outlabels"></script>
 <script>
     ages = {!! json_encode($ages) !!};
     child = [], teen = [], youngAdult = [], adult = [], senior = [];

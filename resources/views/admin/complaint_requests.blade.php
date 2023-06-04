@@ -38,7 +38,6 @@
                                                 <th>Complaint</th>
                                                 <th>Full Documentation</th>
                                                 <th class="text-center">Status</th>
-                                                <th class="text-center">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -48,40 +47,6 @@
                                                 <td>{{ $request->nature_of_complaint }}</td>
                                                 <td><a href="{{ route('admin.complaintShow', ['id' => $request->id]) }}">View Details</a></td>
                                                 <td>{{ $request->status }}</td>
-                                                <td style="display: flex;justify-content: space-evenly;align-items: stretch;">
-                                                    <form action="{{ route('complaintApproved.send', $request->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <input type="hidden" name="status" value="under investigation">
-                                                        <input type="submit" class="btn btn-success btn-sm float-end" value="Investigate" 
-                                                        @if ($request->status == 'pending')
-                                                            enabled
-                                                        @else
-                                                            disabled
-                                                        @endif>
-                                                    </form>
-                                                    <form action="{{ route('complaintDenied.send', $request->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <input type="hidden" name="status" value="denied">
-                                                        <input type="submit" class="btn btn-warning btn-sm float-end" value="Reject" 
-                                                        @if ($request->status == 'pending')
-                                                            enabled
-                                                        @else
-                                                            disabled
-                                                        @endif>
-                                                    </form> 
-                                                    <form action="{{ route('complaints.delete', [$request->id]) }}" method="POST" onsubmit="return confirm('Are you sure?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <input type="submit" class="btn btn-danger btn-sm float-end" value="Delete" 
-                                                    @if ($request->status == 'resolved' || 'denied')
-                                                        enabled
-                                                    @else
-                                                        disabled
-                                                    @endif>
-                                                </form>
-                                                </td>
                                             </tr>
                                         @endforeach
                                         </tbody>
